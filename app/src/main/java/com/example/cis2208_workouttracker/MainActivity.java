@@ -2,6 +2,9 @@ package com.example.cis2208_workouttracker;
 
 import android.os.Bundle;
 
+import com.example.cis2208_workouttracker.domainModels.Exercise;
+import com.example.cis2208_workouttracker.domainModels.RepExercise;
+import com.example.cis2208_workouttracker.domainModels.TimedExercise;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -15,6 +18,10 @@ import android.view.View;
 
 import com.example.cis2208_workouttracker.ui.main.SectionsPagerAdapter;
 import com.example.cis2208_workouttracker.databinding.ActivityMainBinding;
+
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
