@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.cis2208_workouttracker.R;
+import com.example.cis2208_workouttracker.ui.history.HistoryFragment;
+import com.example.cis2208_workouttracker.ui.workouts.WorkoutsFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -29,7 +31,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        Fragment fragment = null;
+        switch (position){
+            case 0: //The case that user clicks workouts
+                fragment = new WorkoutsFragment();
+                break;
+            case 1: //The case that user clicks history
+                fragment = new HistoryFragment();
+                break;
+        }
+        assert fragment != null;
+        return fragment;
     }
 
     @Nullable
