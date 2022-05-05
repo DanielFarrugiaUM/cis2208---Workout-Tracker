@@ -19,6 +19,10 @@ public class WorkoutsAdapter extends
 
     private List<Workout> workouts;
 
+    public WorkoutsAdapter(List<Workout> workouts){
+        this.workouts = workouts;
+    }
+
     @NonNull
     @Override
     public WorkoutsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

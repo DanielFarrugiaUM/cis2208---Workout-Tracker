@@ -2,13 +2,23 @@ package com.example.cis2208_workouttracker.ui.workouts;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cis2208_workouttracker.R;
+import com.example.cis2208_workouttracker.adapters.WorkoutsAdapter;
+import com.example.cis2208_workouttracker.databinding.FragmentWorkoutsBinding;
+import com.example.cis2208_workouttracker.domainModels.Workout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,8 +33,11 @@ public class WorkoutsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private WorkoutsViewModel workoutsViewModel;
+    private WorkoutsAdapter workoutsAdapter;
+    private @NonNull FragmentWorkoutsBinding binding;
+    private RecyclerView workoutsView;
+    private List<Workout> workouts = new ArrayList<>();
 
     public WorkoutsFragment() {
         // Required empty public constructor
@@ -34,33 +47,61 @@ public class WorkoutsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment WorkoutsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WorkoutsFragment newInstance(String param1, String param2) {
-        WorkoutsFragment fragment = new WorkoutsFragment();
-        Bundle args = new Bundle();
+    public static WorkoutsFragment newInstance() {
+        //Auto generated code not required
+/*      Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        fragment.setArguments(args);*/
+        return new WorkoutsFragment();
     }
 
-    @Override
+    //This was auto generated
+/*    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workouts, container, false);
+        workoutsViewModel = new ViewModelProvider(this).get(WorkoutsViewModel.class);
+        binding = FragmentWorkoutsBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        workoutsView = root.findViewById(R.id.workouts_list);
+        setUpRecyclerView();
+        fetchWorkouts();
+        return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    private void fetchWorkouts() {
+        workoutsViewModel.getWorkouts().observe(getViewLifecycleOwner(),
+                this::updateWorkoutsList);
+    }
+
+    private void updateWorkoutsList(List<Workout> newWorkouts){
+        workouts.addAll(newWorkouts);
+        workoutsAdapter.notifyDataSetChanged();
+    }
+
+    private void setUpRecyclerView() {
+        workoutsAdapter = new WorkoutsAdapter(workouts);
+        workoutsView.setAdapter(workoutsAdapter);
+        workoutsView.setLayoutManager(
+                new LinearLayoutManager(workoutsView.getContext())
+        );
     }
 }
