@@ -5,8 +5,18 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="workouts_fragment_title">This is the workouts fragment</string>
     <string name="history_fragment_title">This is the history fragment</string>
-    <string name="workout_test">Workout</string>
+
+    <!--General-->
+    <string name="btn_confirm">Confirm</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_edit">Edit</string>
     <string name="btn_start">Start</string>
+
+    <!--WorkoutsFragment-->
+    <string name="workout_test">Workout</string>
+
+    <string name="add_workout_btn_desc">Add Workout</string>
+
+    <!--AddWorkoutActivity-->
+    <string name="workout_add_hint">Enter Workout name</string>
 </resources>

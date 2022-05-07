@@ -1,5 +1,6 @@
 package com.example.cis2208_workouttracker.ui.workouts;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.adapters.WorkoutsAdapter;
 import com.example.cis2208_workouttracker.databinding.FragmentWorkoutsBinding;
 import com.example.cis2208_workouttracker.domainModels.Workout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +79,9 @@ public class WorkoutsFragment extends Fragment {
         binding = FragmentWorkoutsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         workoutsView = root.findViewById(R.id.workouts_list);
+        //Get the button from the XML and assign the action
+        FloatingActionButton fab = binding.fab;
+        fab.setOnClickListener(this::onClickAdd);
         setUpRecyclerView();
         fetchWorkouts();
         return root;
@@ -103,5 +109,10 @@ public class WorkoutsFragment extends Fragment {
         workoutsView.setLayoutManager(
                 new LinearLayoutManager(workoutsView.getContext())
         );
+    }
+
+    public void onClickAdd(View v){
+        Intent intent = new Intent(getActivity(), AddWorkoutActivity.class);
+        startActivity(intent);
     }
 }

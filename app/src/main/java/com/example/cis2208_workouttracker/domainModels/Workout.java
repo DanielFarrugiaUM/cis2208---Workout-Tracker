@@ -1,8 +1,9 @@
 package com.example.cis2208_workouttracker.domainModels;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Workout {
+public class Workout implements Serializable {
     public int id;
     public String name;
     public List<Exercise> exercises;

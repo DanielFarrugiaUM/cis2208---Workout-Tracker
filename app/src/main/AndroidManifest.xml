@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cis2208WorkoutTracker">
         <activity
+            android:name=".ui.workouts.AddWorkoutActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

@@ -21,8 +21,7 @@
         android:id="@+id/workouts_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity=""
-        />
+        android:layout_gravity="" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,16 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:src="@android:drawable/ic_input_add"
-        android:contentDescription="someText"
+        android:contentDescription="@string/add_workout_btn_desc"
         android:layout_margin="16dp" />
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />-->
 
 </FrameLayout>
