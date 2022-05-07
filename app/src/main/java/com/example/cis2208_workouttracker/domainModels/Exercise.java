@@ -5,6 +5,7 @@ public abstract class Exercise{
     public String name;
     public int noOfSets;
     public double weight;
+    public int workoutId; //FK to workout in DB
 
 
     public Exercise(String name, int noOfSets, double weight) {
