@@ -94,7 +94,7 @@ public class WorkoutsFragment extends Fragment {
     }
 
     private void fetchWorkouts() {
-        workoutsViewModel.getWorkouts().observe(getViewLifecycleOwner(),
+        workoutsViewModel.getWorkouts(getActivity()).observe(getViewLifecycleOwner(),
                 this::updateWorkoutsList);
     }
 
