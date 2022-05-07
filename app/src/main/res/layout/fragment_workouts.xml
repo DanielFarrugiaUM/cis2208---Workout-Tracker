@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@android:drawable/ic_dialog_email"
+        android:src="@android:drawable/ic_input_add"
         android:contentDescription="someText"
         android:layout_margin="16dp" />
 
