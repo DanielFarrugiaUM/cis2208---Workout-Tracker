@@ -19,4 +19,7 @@
 
     <!--AddWorkoutActivity-->
     <string name="workout_add_hint">Enter Workout name</string>
+
+    <!--EditWorkoutActivity-->
+    <string name="workout_name_empty">Workout Not Found</string>
 </resources>

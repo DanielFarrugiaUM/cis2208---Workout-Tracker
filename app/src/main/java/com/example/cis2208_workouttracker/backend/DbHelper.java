@@ -10,7 +10,7 @@ import com.example.cis2208_workouttracker.backend.contracts.WorkoutsContract;
 public class DbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database
     // version.
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "workout_manager.db";
     //Workouts Table
     private final String _workoutsTableName = WorkoutsContract.WorkoutEntry.TABLE_NAME;
@@ -42,7 +42,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
         onUpgrade(db, oldVersion, newVersion);
     }
-
+    //This needs to ba changed to two separate execSQL()
     private String createTables() {
         return createWorkoutsTable() + createExercisesTable();
     }
@@ -64,7 +64,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 + _eTime + " DATETIME);";
     }
     private String dropTables() {
-        return "";
+        return DropWorkoutsTable() + DropExercisesTable();
     }
 
     private String DropWorkoutsTable(){
