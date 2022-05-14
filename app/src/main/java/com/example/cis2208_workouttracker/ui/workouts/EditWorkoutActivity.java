@@ -1,23 +1,60 @@
 package com.example.cis2208_workouttracker.ui.workouts;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.cis2208_workouttracker.R;
+import com.example.cis2208_workouttracker.adapters.ExerciseAdapter;
 import com.example.cis2208_workouttracker.backend.DbHelper;
 import com.example.cis2208_workouttracker.backend.WorkoutsUtility;
+import com.example.cis2208_workouttracker.domainModels.Exercise;
 import com.example.cis2208_workouttracker.domainModels.Workout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EditWorkoutActivity extends AppCompatActivity {
+
+    private ExerciseViewModel exercisesViewModel;
+    private ExerciseAdapter adapter;
+    private RecyclerView exercisesView;
+    private List<Exercise> exercises = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_workout);
+        exercisesViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
+        exercisesView = this.findViewById(R.id.exercise_list);
+        setUpRecyclerView();
+        populateScreen();
         setWorkoutName();
+    }
+
+    private void populateScreen() {
+        exercisesViewModel.getExercises().observe(
+                this,
+                this::updateExercisesList
+        );
+    }
+
+    private void updateExercisesList(List<Exercise> newExercises){
+        exercises.addAll(newExercises);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void setUpRecyclerView() {
+        adapter = new ExerciseAdapter(exercises);
+        exercisesView.setAdapter(adapter);
+        exercisesView.setLayoutManager(
+                new LinearLayoutManager(exercisesView.getContext())
+        );
     }
 
     private void setWorkoutName(){

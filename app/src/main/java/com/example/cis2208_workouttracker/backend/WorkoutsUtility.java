@@ -98,6 +98,14 @@ public class WorkoutsUtility {
         return workout;
     }
 
+    //Delete a workout by id
+    public void removeWorkoutById(long id){
+        SQLiteDatabase db = _dbHelper.getWritableDatabase();
+        String whereClause = BaseColumns._ID + "=?";
+        String[] whereArgs = { Long.toString(id) };
+        db.delete(WorkoutsContract.WorkoutEntry.TABLE_NAME, whereClause, whereArgs);
+    }
+
     //Delete all workouts from db
     public void removeAll(){
         SQLiteDatabase db = _dbHelper.getWritableDatabase();

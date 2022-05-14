@@ -21,23 +21,10 @@ public class WorkoutsViewModel extends ViewModel {
     }
 
     public MutableLiveData<List<Workout>> getWorkouts(Context context){
-        //ArrayList<Workout> newWorkouts = new ArrayList<>();
+
         DbHelper dbHelper = new DbHelper(context);
         WorkoutsUtility workoutsUtility = new WorkoutsUtility(dbHelper);
         ArrayList<Workout> newWorkouts = workoutsUtility.getWorkouts();
-        //Generate some dummy workouts for testing
-        /*Workout workout1 = new Workout("Chest and Triceps");
-        Workout workout2 = new Workout("Back and Biceps");
-        Workout workout3 = new Workout("Legs and Abs");
-        Workout workout4 = new Workout("Chest and Triceps");
-        Workout workout5 = new Workout("Back and Biceps");
-        Workout workout6 = new Workout("Legs and Abs");
-        newWorkouts.add(workout1);
-        newWorkouts.add(workout2);
-        newWorkouts.add(workout3);
-        newWorkouts.add(workout4);
-        newWorkouts.add(workout5);
-        newWorkouts.add(workout6);*/
 
         workouts.setValue(newWorkouts);
         return workouts;

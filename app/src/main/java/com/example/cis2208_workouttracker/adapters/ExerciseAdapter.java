@@ -11,54 +11,50 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cis2208_workouttracker.R;
-import com.example.cis2208_workouttracker.backend.DbHelper;
+import com.example.cis2208_workouttracker.domainModels.Exercise;
 import com.example.cis2208_workouttracker.domainModels.Workout;
 
 import java.util.List;
 
-public class WorkoutsAdapter extends
-        RecyclerView.Adapter<WorkoutsAdapter.ViewHolder> {
+public class ExerciseAdapter extends
+        RecyclerView.Adapter<ExerciseAdapter.ViewHolder> {
 
-    private List<Workout> workouts;
+    private List<Exercise> exercises;
 
-    public WorkoutsAdapter(List<Workout> workouts){
-        this.workouts = workouts;
-    }
+    public ExerciseAdapter(List<Exercise> exercises){ this.exercises = exercises; }
 
     @NonNull
     @Override
-    public WorkoutsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View workoutsView = inflater.inflate(R.layout.card_workout, parent, false);
-        return new ViewHolder(workoutsView);
+        View exercisesView = inflater.inflate(R.layout.card_rep_exercise, parent, false);
+        return new ExerciseAdapter.ViewHolder(exercisesView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WorkoutsAdapter.ViewHolder holder, int position) {
-        Workout workout = workouts.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Exercise exercise = exercises.get(position);
 
         TextView nameView = holder.nameTextView;
-        nameView.setText(workout.name);
+        nameView.setText(exercise.name);
     }
 
     @Override
     public int getItemCount() {
-        return workouts.size();
+        return exercises.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;
         public Button deleteBtn;
         public Button editBtn;
-        public Button startBtn;
 
         public ViewHolder(final View workoutsView) {
             super(workoutsView);
-            nameTextView =  workoutsView.findViewById(R.id.workout_name);
-            deleteBtn = workoutsView.findViewById(R.id.workout_delete_btn);
-            editBtn = workoutsView.findViewById(R.id.workout_edit_btn);
-            startBtn = workoutsView.findViewById(R.id.workout_start_btn);
+            nameTextView =  workoutsView.findViewById(R.id.rep_ex_name);
+            deleteBtn = workoutsView.findViewById(R.id.rep_ex_delete_btn);
+            editBtn = workoutsView.findViewById(R.id.rep_ex_edit_btn);
         }
 
         public void onDeleteClick(long id){
