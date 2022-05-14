@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.domainModels.Exercise;
+import com.example.cis2208_workouttracker.domainModels.RepExercise;
+import com.example.cis2208_workouttracker.domainModels.TimedExercise;
 import com.example.cis2208_workouttracker.domainModels.Workout;
 
 import java.util.List;
@@ -38,6 +40,26 @@ public class ExerciseAdapter extends
 
         TextView nameView = holder.nameTextView;
         nameView.setText(exercise.name);
+
+        TextView setsValue = holder.setsValueTextView;
+        setsValue.setText(String.valueOf(exercise.getNoOfSets()));
+
+        TextView weightsValue = holder.weightValueTextView;
+        String weight = Double.toString(exercise.getWeight());
+        weightsValue.setText(weight);
+
+        if(exercise instanceof TimedExercise){
+            TextView label = holder.repsOrTimeLabelTextView;
+            label.setText(R.string.time_label);
+
+            TextView timeValue = holder.repsOrTimeValueTextView;
+            String time = String.valueOf(((TimedExercise) exercise).getTime());
+            timeValue.setText(time);
+        }else{
+            TextView repsValue = holder.repsOrTimeValueTextView;
+            String reps = String.valueOf(((RepExercise)exercise).getNoOfReps());
+            repsValue.setText(reps);
+        }
     }
 
     @Override
@@ -47,14 +69,22 @@ public class ExerciseAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView nameTextView;
+        public TextView setsValueTextView;
+        public TextView repsOrTimeLabelTextView;
+        public TextView repsOrTimeValueTextView;
+        public TextView weightValueTextView;
         public Button deleteBtn;
         public Button editBtn;
 
-        public ViewHolder(final View workoutsView) {
-            super(workoutsView);
-            nameTextView =  workoutsView.findViewById(R.id.rep_ex_name);
-            deleteBtn = workoutsView.findViewById(R.id.rep_ex_delete_btn);
-            editBtn = workoutsView.findViewById(R.id.rep_ex_edit_btn);
+        public ViewHolder(final View exercisesView) {
+            super(exercisesView);
+            nameTextView =  exercisesView.findViewById(R.id.rep_ex_name);
+            setsValueTextView = exercisesView.findViewById(R.id.sets);
+            repsOrTimeLabelTextView = exercisesView.findViewById(R.id.reps_or_time_label);
+            repsOrTimeValueTextView = exercisesView.findViewById(R.id.reps_or_time);
+            weightValueTextView = exercisesView.findViewById(R.id.weight);
+            deleteBtn = exercisesView.findViewById(R.id.rep_ex_delete_btn);
+            editBtn = exercisesView.findViewById(R.id.rep_ex_edit_btn);
         }
 
         public void onDeleteClick(long id){

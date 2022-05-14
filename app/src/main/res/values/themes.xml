@@ -22,4 +22,11 @@
     <style name="Theme.Cis2208WorkoutTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Cis2208WorkoutTracker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--My Styles-->
+    <style name="ExerciseValue">
+        <item name="android:textAppearance">?attr/textAppearanceListItem</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
 </resources>

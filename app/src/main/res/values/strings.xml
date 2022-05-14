@@ -22,4 +22,11 @@
 
     <!--EditWorkoutActivity-->
     <string name="workout_name_empty">Workout Not Found</string>
+
+    <!--Exercise Card-->
+    <string name="exercise_name_placeholder">Exercise Name</string>
+    <string name="sets">Sets\u0020</string>
+    <string name="reps_time">Reps\u0020</string>
+    <string name="time_label">Time\u0020</string>
+    <string name="weight">Weight\u0020</string>
 </resources>
