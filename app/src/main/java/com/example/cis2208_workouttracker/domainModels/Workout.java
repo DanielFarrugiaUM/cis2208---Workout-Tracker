@@ -4,18 +4,20 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Workout implements Serializable {
-    public int id;
+    public long id;
     public String name;
     public List<Exercise> exercises;
 
-    public Workout() {
+    public Workout(long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Workout(String name) {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

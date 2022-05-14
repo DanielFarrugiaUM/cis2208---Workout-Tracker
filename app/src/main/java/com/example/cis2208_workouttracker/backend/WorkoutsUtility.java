@@ -57,7 +57,7 @@ public class WorkoutsUtility {
             String name = cursor.getString(
                     cursor.getColumnIndexOrThrow(WorkoutsContract.WorkoutEntry.COLUMN_NAME_NAME)
             );
-            Workout workout = new Workout(name);
+            Workout workout = new Workout(id, name);
             workouts.add(workout);
         }
 
