@@ -10,13 +10,17 @@ import com.example.cis2208_workouttracker.backend.contracts.WorkoutsContract;
 public class DbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database
     // version.
-    public static final int DATABASE_VERSION = 2;
+
+    //Not that SQL statements separated by a ; cannot be executed with one
+    //db.execSQL() call
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "workout_manager.db";
     //Workouts Table
     private final String _workoutsTableName = WorkoutsContract.WorkoutEntry.TABLE_NAME;
     private final String _wName = WorkoutsContract.WorkoutEntry.COLUMN_NAME_NAME;
     //Exercises Table
-    private final String _exercisesTableName = ExercisesContract.ExerciseEntry.TABLE_NAME;
+    private final String _repExercisesTableName = ExercisesContract.ExerciseEntry.TABLE_NAME_REPS;
+    private final String _timedExercisesTableName = ExercisesContract.ExerciseEntry.TABLE_NAME_TIMED;
     private final String _eName = ExercisesContract.ExerciseEntry.COLUMN_NAME_NAME;
     private final String _eSets = ExercisesContract.ExerciseEntry.COLUMN_NAME_SETS;
     private final String _eWeight = ExercisesContract.ExerciseEntry.COLUMN_NAME_WEIGHT;
@@ -30,21 +34,25 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(createTables());
+        db.execSQL(createWorkoutsTable());
+        db.execSQL(createRepExercisesTable());
+        db.execSQL(createTimedExerciseTable());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL(dropTables());
-        db.execSQL(createTables());
+        //Drop previous tables
+        db.execSQL(dropWorkoutsTable());
+        db.execSQL(dropRepExercisesTable());
+        db.execSQL(dropTimedExercisesTable());
+        //Create new ones
+        db.execSQL(createWorkoutsTable());
+        db.execSQL(createRepExercisesTable());
+        db.execSQL(createTimedExerciseTable());
     }
 
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion){
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
-    }
-    //This needs to ba changed to two separate execSQL()
-    private String createTables() {
-        return createWorkoutsTable() + createExercisesTable();
     }
 
     private String createWorkoutsTable(){
@@ -53,27 +61,38 @@ public class DbHelper extends SQLiteOpenHelper {
                 + _wName + " varchar);";
     }
 
-    private String createExercisesTable(){
-        return "CREATE TABLE " + _exercisesTableName + " ("
+    private String createRepExercisesTable(){
+        return "CREATE TABLE " + _repExercisesTableName + " ("
                 + ExercisesContract.ExerciseEntry._ID + " INTEGER PRIMARY KEY, "
                 + _eName + " varchar, "
-                + _eWorkoutId + " INT, "
-                + _eSets + " INT, "
-                + _eWeight + " REAL, "
-                + _eReps + " INT, "
-                + _eTime + " DATETIME);";
-    }
-    private String dropTables() {
-        return DropWorkoutsTable() + DropExercisesTable();
+                + _eWorkoutId + " INTEGER, "
+                + _eSets + " INTEGER, "
+                + _eWeight + " NUMERIC, "
+                + _eReps + " INTEGER);";
     }
 
-    private String DropWorkoutsTable(){
+    private String createTimedExerciseTable(){
+        return "CREATE TABLE " + _timedExercisesTableName + " ("
+                + ExercisesContract.ExerciseEntry._ID + " INTEGER PRIMARY KEY, "
+                + _eName + " varchar, "
+                + _eWorkoutId + " INTEGER, "
+                + _eSets + " INTEGER, "
+                + _eWeight + " INTEGER, "
+                + _eTime + " INTEGER);"; //WILL NEED TO CONVERT TIME
+    }
+
+    private String dropWorkoutsTable(){
         return "DROP TABLE IF EXISTS "
                 + _workoutsTableName + ";";
     }
 
-    private String DropExercisesTable(){
+    private String dropRepExercisesTable(){
         return "DROP TABLE IF EXISTS "
-                + _exercisesTableName + ";";
+                + _repExercisesTableName + ";";
+    }
+
+    private String dropTimedExercisesTable(){
+        return "DROP TABLE IF EXISTS "
+                + _timedExercisesTableName + ";";
     }
 }

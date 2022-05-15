@@ -23,7 +23,7 @@ public class ExerciseViewModel extends ViewModel {
         //Hard coded data, needs to come from DB
         RepExercise ex1 = new RepExercise("Exercise1", 3,15, 12);
         RepExercise ex2 = new RepExercise("Exercise1", 5,12.5, 8);
-        TimedExercise ex3 = new TimedExercise("timed", 4, 0, new Time(56));
+        TimedExercise ex3 = new TimedExercise("timed", 4, 0, new Time(0,1,30));
         newExercises.add(ex1);
         newExercises.add(ex2);
         newExercises.add(ex3);

@@ -7,7 +7,8 @@ public class ExercisesContract {
     private ExercisesContract(){}
     //Define the content for Exercises
     public static class ExerciseEntry implements BaseColumns {
-        public static final String TABLE_NAME = "exercises";
+        public static final String TABLE_NAME_REPS = "rep_exercises";
+        public static final String TABLE_NAME_TIMED = "timed_exercises";
         public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_SETS = "sets";
         public static final String COLUMN_NAME_WEIGHT = "weight";
