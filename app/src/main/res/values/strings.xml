@@ -11,6 +11,11 @@
     <string name="btn_delete">Delete</string>
     <string name="btn_edit">Edit</string>
     <string name="btn_start">Start</string>
+    <string name="cancel">Cancel</string>
+    <string-array name="exercise_types">
+        <item>Repetition Exercise</item>
+        <item>Timed Exercise</item>
+    </string-array>
 
     <!--WorkoutsFragment-->
     <string name="workout_test">Workout</string>
@@ -29,4 +34,12 @@
     <string name="reps_time">Reps\u0020</string>
     <string name="time_label">Time\u0020</string>
     <string name="weight">Weight\u0020</string>
+
+    <!--Add Exercise Dialog-->
+    <string name="dialog_ex_title">Choose type of exercise</string>
+    <string name="dialog_ex_msg">
+        Repetition exercise is doing sets of a repeated movement,
+        example: bicep curls. Timed exercise is when effort is measured over time,
+        examples: plank or sprint.
+    </string>
 </resources>

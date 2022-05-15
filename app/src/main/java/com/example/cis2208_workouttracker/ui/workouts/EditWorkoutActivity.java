@@ -1,12 +1,15 @@
 package com.example.cis2208_workouttracker.ui.workouts;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.cis2208_workouttracker.R;
@@ -15,6 +18,8 @@ import com.example.cis2208_workouttracker.backend.DbHelper;
 import com.example.cis2208_workouttracker.backend.WorkoutsUtility;
 import com.example.cis2208_workouttracker.domainModels.Exercise;
 import com.example.cis2208_workouttracker.domainModels.Workout;
+import com.example.cis2208_workouttracker.ui.dialogs.AddExerciseDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +37,8 @@ public class EditWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_workout);
         exercisesViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
         exercisesView = this.findViewById(R.id.exercise_list);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(this::onClickAdd);
         setUpRecyclerView();
         populateScreen();
         setWorkoutName();
@@ -71,5 +78,10 @@ public class EditWorkoutActivity extends AppCompatActivity {
         TextView workoutNameView = findViewById(R.id.workout_name_edit);
         String workoutName = workout.getName();
         workoutNameView.setText(workoutName);
+    }
+
+    private void onClickAdd(View view){
+        DialogFragment dialog = new AddExerciseDialog();
+        dialog.show(getSupportFragmentManager(), "AddExerciseDialog");
     }
 }
