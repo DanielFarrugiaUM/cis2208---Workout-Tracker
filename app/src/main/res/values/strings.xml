@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">cis2208 - Workout Tracker</string>
+    <string name="app_name">Workout Tracker</string>
     <string name="tab_text_1">My Workouts</string>
     <string name="tab_text_2">History</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -28,12 +28,16 @@
     <!--EditWorkoutActivity-->
     <string name="workout_name_empty">Workout Not Found</string>
 
-    <!--Exercise Card-->
+    <!--Exercise Related Strings-->
     <string name="exercise_name_placeholder">Exercise Name</string>
-    <string name="sets">Sets\u0020</string>
-    <string name="reps_time">Reps\u0020</string>
-    <string name="time_label">Time\u0020</string>
-    <string name="weight">Weight\u0020</string>
+    <string name="sets_label">Sets</string>
+    <string name="reps_time">Repetitions</string>
+    <string name="reps_label">Repetitions</string>
+    <string name="time_label">Time</string>
+    <string name="weight_label">Weight</string>
+    <string name="add_rep_heading">Add Repetition Exercise</string>
+    <string name="add_timed_heading">Add Timed Exercise</string>
+    <string name="ex_name_hint">Exercise Name</string>
 
     <!--Add Exercise Dialog-->
     <string name="dialog_ex_title">Choose type of exercise</string>
@@ -42,4 +46,8 @@
         example: bicep curls. Timed exercise is when effort is measured over time,
         examples: plank or sprint.
     </string>
+
+    <!--Exercise Related Strings-->
+
+
 </resources>
