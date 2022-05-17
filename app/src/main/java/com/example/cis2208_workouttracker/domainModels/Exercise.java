@@ -1,12 +1,19 @@
 package com.example.cis2208_workouttracker.domainModels;
 
 public abstract class Exercise{
-    public int id;
+    public long id;
     public String name;
     public int noOfSets;
     public double weight;
     public long workoutId; //FK to workout in DB
 
+    public Exercise(long id, String name, int noOfSets, double weight, long workoutFK) {
+        this.id = id;
+        this.name = name;
+        this.noOfSets = noOfSets;
+        this.weight = weight;
+        this.workoutId = workoutFK;
+    }
 
     public Exercise(String name, int noOfSets, double weight, long workoutFK) {
         this.name = name;
@@ -15,7 +22,7 @@ public abstract class Exercise{
         this.workoutId = workoutFK;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

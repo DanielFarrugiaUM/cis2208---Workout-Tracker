@@ -6,6 +6,11 @@ public class TimedExercise extends Exercise{
 
     public Time time;
 
+    public TimedExercise(long id, String name, int noOfSets, double weight, Time time, long workoutId) {
+        super(id, name, noOfSets, weight, workoutId);
+        this.time = time;
+    }
+
     public TimedExercise(String name, int noOfSets, double weight, Time time, long workoutId) {
         super(name, noOfSets, weight, workoutId);
         this.time = time;

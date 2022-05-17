@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cis2208_workouttracker.R;
+import com.example.cis2208_workouttracker.backend.DbHelper;
+import com.example.cis2208_workouttracker.backend.ExerciseUtility;
 import com.example.cis2208_workouttracker.domainModels.Exercise;
 import com.example.cis2208_workouttracker.domainModels.RepExercise;
 import com.example.cis2208_workouttracker.domainModels.TimedExercise;
@@ -22,8 +24,16 @@ public class ExerciseAdapter extends
         RecyclerView.Adapter<ExerciseAdapter.ViewHolder> {
 
     private List<Exercise> exercises;
+    private final Context _context;
+    private final DbHelper _dbHelper;
+    private final ExerciseUtility _exerciseUtility;
 
-    public ExerciseAdapter(List<Exercise> exercises){ this.exercises = exercises; }
+    public ExerciseAdapter(List<Exercise> exercises, Context context){
+        this.exercises = exercises;
+        this._context = context;
+        _dbHelper = new DbHelper(_context);
+        _exerciseUtility = new ExerciseUtility(_dbHelper);
+    }
 
     @NonNull
     @Override
@@ -85,10 +95,20 @@ public class ExerciseAdapter extends
             weightValueTextView = exercisesView.findViewById(R.id.weight);
             deleteBtn = exercisesView.findViewById(R.id.rep_ex_delete_btn);
             editBtn = exercisesView.findViewById(R.id.rep_ex_edit_btn);
+            deleteBtn.setOnClickListener(view -> onDeleteClick(exercisesView));
         }
 
-        public void onDeleteClick(long id){
-
+        public void onDeleteClick(View exerciseView){
+            int pos = getAdapterPosition();
+            Exercise exercise = exercises.get(pos);
+            long id = exercise.getId();
+            //Note that exercise can be of two types
+            //This will change which table it will be removed from
+            if(exercise instanceof RepExercise){
+                _exerciseUtility.removeRepExerciseById(id);
+            }else if(exercise instanceof TimedExercise){
+                _exerciseUtility.removeTimedExerciseById(id);
+            }
         }
     }
 }

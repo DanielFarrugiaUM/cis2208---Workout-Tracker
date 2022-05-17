@@ -32,6 +32,7 @@ public class ExerciseUtility {
 
     public ExerciseUtility(DbHelper dbHelper){ this._dbHelper =dbHelper; }
 
+    //Insertions-------------------------------------------------------------
     //Add an rep exercise to db
     public long insertRepExercise(RepExercise exercise){
         SQLiteDatabase db = _dbHelper.getWritableDatabase();
@@ -64,6 +65,7 @@ public class ExerciseUtility {
         );
     }
 
+    //Select-----------------------------------------------------------------
     //Get Exercises belonging to a particular workout
     public ArrayList<Exercise> getAllExercisesByFK(long fk){
         ArrayList<Exercise> exercises = new ArrayList<>();
@@ -107,6 +109,9 @@ public class ExerciseUtility {
         RepExercise exercise;
 
         while (cursor.moveToNext()){
+            long id = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(BaseColumns._ID)
+            );
             String name = cursor.getString(
                     cursor.getColumnIndexOrThrow(nameCol)
             );
@@ -122,7 +127,7 @@ public class ExerciseUtility {
             long workoutFK = cursor.getLong(
                     cursor.getColumnIndexOrThrow(workoutFkCol)
             );
-            exercise = new RepExercise(name, sets, weight, reps, workoutFK);
+            exercise = new RepExercise(id, name, sets, weight, reps, workoutFK);
             exercises.add(exercise);
         }
         cursor.close();
@@ -159,6 +164,9 @@ public class ExerciseUtility {
         TimedExercise exercise;
 
         while (cursor.moveToNext()){
+            long id = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(BaseColumns._ID)
+            );
             String name = cursor.getString(
                     cursor.getColumnIndexOrThrow(nameCol)
             );
@@ -179,10 +187,27 @@ public class ExerciseUtility {
             int minutes = TimedExercise.getMinutes(totalSeconds);
             int seconds = TimedExercise.getRemainderSeconds(totalSeconds);
             Time time = new Time(0, minutes, seconds);
-            exercise = new TimedExercise(name, sets, weight, time, workoutFK);
+            exercise = new TimedExercise(id, name, sets, weight, time, workoutFK);
             exercises.add(exercise);
         }
         cursor.close();
         return exercises;
+    }
+
+    //Deletions--------------------------------------------------------------
+    //Delete a rep exercise by id
+    public void removeRepExerciseById(long id){
+        SQLiteDatabase db = _dbHelper.getWritableDatabase();
+        String whereClause = BaseColumns._ID + "=?";
+        String[] whereArgs = { Long.toString(id) };
+        db.delete(repsTable, whereClause, whereArgs);
+    }
+
+    //Delete a rep exercise by id
+    public void removeTimedExerciseById(long id){
+        SQLiteDatabase db = _dbHelper.getWritableDatabase();
+        String whereClause = BaseColumns._ID + "=?";
+        String[] whereArgs = { Long.toString(id) };
+        db.delete(timedTable, whereClause, whereArgs);
     }
 }

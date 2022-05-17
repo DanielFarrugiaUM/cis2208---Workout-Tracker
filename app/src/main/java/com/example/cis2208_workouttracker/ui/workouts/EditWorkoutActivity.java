@@ -60,7 +60,7 @@ public class EditWorkoutActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        adapter = new ExerciseAdapter(exercises);
+        adapter = new ExerciseAdapter(exercises, this);
         exercisesView.setAdapter(adapter);
         exercisesView.setLayoutManager(
                 new LinearLayoutManager(exercisesView.getContext())
