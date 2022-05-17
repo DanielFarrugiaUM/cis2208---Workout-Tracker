@@ -45,7 +45,10 @@ public class EditWorkoutActivity extends AppCompatActivity {
     }
 
     private void populateScreen() {
-        exercisesViewModel.getExercises().observe(
+        //Get the id from previous activity
+        Intent intent = getIntent();
+        long id = intent.getLongExtra("workoutId", -1);
+        exercisesViewModel.getExercises(this, id).observe(
                 this,
                 this::updateExercisesList
         );

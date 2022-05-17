@@ -22,4 +22,12 @@ public class TimedExercise extends Exercise{
     public int getTotalSeconds(){
         return this.time.getSeconds() + this.time.getMinutes() * 60;
     }
+
+    public static int getMinutes(int totalSeconds){
+        return totalSeconds / 60;
+    }
+
+    public static int getRemainderSeconds(int totalSeconds){
+        return totalSeconds % 60;
+    }
 }

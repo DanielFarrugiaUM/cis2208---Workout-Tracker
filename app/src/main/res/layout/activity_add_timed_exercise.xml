@@ -34,7 +34,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/rep_name_input"
+                android:id="@+id/timed_name_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -46,7 +46,7 @@
             android:orientation="horizontal">
             <!--Sets-->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/create_rep_sets"
+                android:id="@+id/create_timed_sets"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:padding="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/rep_sets_input"
+                    android:id="@+id/timed_sets_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number" />
@@ -63,7 +63,7 @@
             </com.google.android.material.textfield.TextInputLayout>
             <!--Weight-->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/create_rep_weight"
+                android:id="@+id/create_timed_weight"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -72,10 +72,10 @@
                 android:padding="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/rep_weight_input"
+                    android:id="@+id/timed_weight_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
