@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.workouts.AddRepExerciseActivity">
+    tools:context=".ui.workouts.AddTimedExerciseActivity">
 
     <TextView
-        android:id="@+id/create_rep_heading"
+        android:id="@+id/create_timed_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/add_rep_heading"
+        android:text="@string/add_timed_heading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/create_rep_heading">
+        app:layout_constraintTop_toBottomOf="@id/create_timed_heading">
         <!--Enter Name-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/create_rep_name"
@@ -61,23 +61,6 @@
                     android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
-            <!--Reps-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/create_rep_reps"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/reps_label"
-                android:padding="5dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/rep_reps_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-
-            </com.google.android.material.textfield.TextInputLayout>
             <!--Weight-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/create_rep_weight"
@@ -92,10 +75,52 @@
                     android:id="@+id/rep_weight_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+        <!--Time-->
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_minutes"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/minutes_label"
+                android:padding="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/minutes_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_seconds"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/seconds_label"
+                android:padding="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/seconds_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -108,6 +133,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

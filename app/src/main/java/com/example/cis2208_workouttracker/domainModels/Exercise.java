@@ -5,13 +5,14 @@ public abstract class Exercise{
     public String name;
     public int noOfSets;
     public double weight;
-    public int workoutId; //FK to workout in DB
+    public long workoutId; //FK to workout in DB
 
 
-    public Exercise(String name, int noOfSets, double weight) {
+    public Exercise(String name, int noOfSets, double weight, long workoutFK) {
         this.name = name;
         this.noOfSets = noOfSets;
         this.weight = weight;
+        this.workoutId = workoutFK;
     }
 
     public int getId() {
@@ -44,5 +45,9 @@ public abstract class Exercise{
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public long getWorkoutId() {
+        return workoutId;
     }
 }

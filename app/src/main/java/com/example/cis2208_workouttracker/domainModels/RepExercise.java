@@ -3,8 +3,8 @@ package com.example.cis2208_workouttracker.domainModels;
 public class RepExercise extends Exercise{
     public int noOfReps;
 
-    public RepExercise(String name, int noOfSets, double weight, int noOfReps) {
-        super(name, noOfSets, weight);
+    public RepExercise(String name, int noOfSets, double weight, int noOfReps, long workoutId) {
+        super(name, noOfSets, weight, workoutId);
         this.noOfReps = noOfReps;
     }
 

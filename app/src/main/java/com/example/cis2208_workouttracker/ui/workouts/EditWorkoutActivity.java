@@ -81,7 +81,9 @@ public class EditWorkoutActivity extends AppCompatActivity {
     }
 
     private void onClickAdd(View view){
-        DialogFragment dialog = new AddExerciseDialog();
+        Intent intent = getIntent();
+        long workoutIid = intent.getLongExtra("workoutId", -1);
+        DialogFragment dialog = new AddExerciseDialog(workoutIid);
         dialog.show(getSupportFragmentManager(), "AddExerciseDialog");
     }
 }

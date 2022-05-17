@@ -13,6 +13,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.ui.workouts.AddRepExerciseActivity;
+import com.example.cis2208_workouttracker.ui.workouts.AddTimedExerciseActivity;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
@@ -22,7 +23,11 @@ public class AddExerciseDialog extends DialogFragment {
 
     private int mSelectedItem;
     private Button positiveBtn;
+    private long workoutId;
 
+    public AddExerciseDialog(long workoutId){
+        this.workoutId = workoutId;
+    }
     //The following was needed to enable/disable confirm btn
     //From:
     // https://stackoverflow.com/questions/15912124/android-disable-dialogfragment-ok-cancel-buttons
@@ -64,9 +69,11 @@ public class AddExerciseDialog extends DialogFragment {
                 switch (mSelectedItem){
                     case 0:
                         intent = new Intent(getActivity(), AddRepExerciseActivity.class);
+                        intent.putExtra("workoutId", workoutId);
                         break;
                     case 1:
-                        intent = new Intent(getActivity(), AddRepExerciseActivity.class);
+                        intent = new Intent(getActivity(), AddTimedExerciseActivity.class);
+                        intent.putExtra("workoutId", workoutId);
                         break;
                     default://Auto generated, case no selection is made
                         throw new IllegalStateException("Unexpected value: " + mSelectedItem);

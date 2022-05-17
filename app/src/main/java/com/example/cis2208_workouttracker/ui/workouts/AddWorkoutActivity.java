@@ -23,7 +23,7 @@ public class AddWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_workout);
         //Get the button from layout and set listener
 
-        Button confirmBtn = findViewById(R.id.confirm_workout_name_btn);
+        Button confirmBtn = findViewById(R.id.confirm_btn);
         confirmBtn.setOnClickListener(this::onClickConfirm);
     }
 
