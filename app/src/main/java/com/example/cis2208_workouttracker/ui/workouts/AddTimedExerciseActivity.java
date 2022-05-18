@@ -10,7 +10,6 @@ import android.widget.Button;
 import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.backend.DbHelper;
 import com.example.cis2208_workouttracker.backend.ExerciseUtility;
-import com.example.cis2208_workouttracker.domainModels.RepExercise;
 import com.example.cis2208_workouttracker.domainModels.TimedExercise;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -21,7 +20,7 @@ public class AddTimedExerciseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_timed_exercise);
+        setContentView(R.layout.activity_add_edit_timed_exercise);
 
         Button confirmBtn = findViewById(R.id.confirm_btn);
         confirmBtn.setOnClickListener(this::onClickConfirm);

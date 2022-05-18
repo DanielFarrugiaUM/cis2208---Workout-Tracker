@@ -23,7 +23,7 @@ public class TimedExercise extends Exercise{
     public void setTime(Time time) {
         this.time = time;
     }
-
+    //The are some utility methods
     public int getTotalSeconds(){
         return this.time.getSeconds() + this.time.getMinutes() * 60;
     }

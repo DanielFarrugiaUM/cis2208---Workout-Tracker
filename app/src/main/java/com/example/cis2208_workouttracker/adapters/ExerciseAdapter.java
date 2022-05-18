@@ -19,6 +19,7 @@ import com.example.cis2208_workouttracker.domainModels.RepExercise;
 import com.example.cis2208_workouttracker.domainModels.TimedExercise;
 import com.example.cis2208_workouttracker.domainModels.Workout;
 import com.example.cis2208_workouttracker.ui.workouts.EditRepExerciseActivity;
+import com.example.cis2208_workouttracker.ui.workouts.EditTimedExerciseActivity;
 
 import java.util.List;
 
@@ -128,7 +129,9 @@ public class ExerciseAdapter extends
                 intent.putExtra("exerciseId", exercise.getId());
                 _context.startActivity(intent);
             }else if(exercise instanceof TimedExercise){
-                //do the same but with Timed
+                Intent intent = new Intent(_context, EditTimedExerciseActivity.class);
+                intent.putExtra("exerciseId", exercise.getId());
+                _context.startActivity(intent);
             }
         }
     }

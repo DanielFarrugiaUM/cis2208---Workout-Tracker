@@ -12,9 +12,12 @@ import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.backend.DbHelper;
 import com.example.cis2208_workouttracker.backend.ExerciseUtility;
 import com.example.cis2208_workouttracker.domainModels.RepExercise;
+import com.example.cis2208_workouttracker.domainModels.TimedExercise;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class EditRepExerciseActivity extends AppCompatActivity {
+import java.sql.Time;
+
+public class EditTimedExerciseActivity extends AppCompatActivity {
 
     long exerciseId;
     long workoutId;
@@ -24,14 +27,15 @@ public class EditRepExerciseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit_rep_exercise);
+
+        setContentView(R.layout.activity_add_edit_timed_exercise);
         //Get the id from the incoming intent
         Intent intent = getIntent();
         exerciseId = intent.getLongExtra("exerciseId", -1);
         //Create db tools and and initialise instance in memory
         _dbHelper = new DbHelper(this);
         _exerciseUtil = new ExerciseUtility(_dbHelper);
-        RepExercise exercise = (RepExercise) _exerciseUtil.getRepExerciseById(exerciseId);
+        TimedExercise exercise = (TimedExercise) _exerciseUtil.getTimedExerciseById(exerciseId);
         workoutId = exercise.getWorkoutId();
         //Show the current exercise details
         populateScreen(exercise);
@@ -40,26 +44,32 @@ public class EditRepExerciseActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(this::onClickConfirm);
     }
 
-    private void populateScreen(RepExercise exercise){
+    private void populateScreen(TimedExercise exercise){
         //Set title to Edit Exercise
-        TextView headingView = findViewById(R.id.create_rep_heading);
+        TextView headingView = findViewById(R.id.create_edit_timed_heading);
         headingView.setText(R.string.edit_exercise_heading);
         //Populate input views
-
-        TextInputEditText nameInput = findViewById(R.id.rep_name_input);
+        TextInputEditText nameInput = findViewById(R.id.timed_name_input);
         nameInput.setText(exercise.getName());
 
-        TextInputEditText setsInput = findViewById(R.id.rep_sets_input);
+        TextInputEditText setsInput = findViewById(R.id.timed_sets_input);
         int sets = exercise.getNoOfSets();
         String setsString = String.valueOf(sets);
         setsInput.setText(setsString);
 
-        TextInputEditText repsInput = findViewById(R.id.rep_reps_input);
-        int reps = exercise.getNoOfReps();
-        String repsString = String.valueOf(reps);
-        repsInput.setText(repsString);
+        //Process minutes and seconds separately
+        Time time = exercise.getTime();
+        int minutes = time.getMinutes();
+        int seconds = time.getSeconds();
+        String minString = String.valueOf(minutes);
+        String secString = String.valueOf(seconds);
 
-        TextInputEditText weightInput = findViewById(R.id.rep_weight_input);
+        TextInputEditText minutesInput = findViewById(R.id.minutes_input);
+        minutesInput.setText(minString);
+        TextInputEditText secondsInput = findViewById(R.id.seconds_input);
+        secondsInput.setText(secString);
+
+        TextInputEditText weightInput = findViewById(R.id.timed_weight_input);
         double weight = exercise.getWeight();
         String weightString = Double.toString(weight);
         weightInput.setText(weightString);
@@ -67,23 +77,29 @@ public class EditRepExerciseActivity extends AppCompatActivity {
 
     private void onClickConfirm(View view) {
         //Get the new values
-        TextInputEditText nameInput = findViewById(R.id.rep_name_input);
+        TextInputEditText nameInput = findViewById(R.id.timed_name_input);
         String name = nameInput.getEditableText().toString();
 
-        TextInputEditText setsInput = findViewById(R.id.rep_sets_input);
+        TextInputEditText setsInput = findViewById(R.id.timed_sets_input);
         String setsValue = setsInput.getEditableText().toString();
         int sets = Integer.parseInt(setsValue);
+        //Minutes and seconds taken separately to create Time() instance
+        TextInputEditText minutesInput = findViewById(R.id.minutes_input);
+        String minValue = minutesInput.getEditableText().toString();
+        int min = Integer.parseInt(minValue);
 
-        TextInputEditText repsInput = findViewById(R.id.rep_reps_input);
-        String repsValue = repsInput.getEditableText().toString();
-        int reps = Integer.parseInt(repsValue);
+        TextInputEditText secondsInput = findViewById(R.id.seconds_input);
+        String secValue = secondsInput.getEditableText().toString();
+        int sec = Integer.parseInt(secValue);
 
-        TextInputEditText weightInput = findViewById(R.id.rep_weight_input);
+        Time time = new Time(0, min, sec);
+
+        TextInputEditText weightInput = findViewById(R.id.timed_weight_input);
         String weightValue = weightInput.getEditableText().toString();
         double weight = Double.parseDouble(weightValue);
 
-        RepExercise exercise = new RepExercise(exerciseId, name, sets, weight, reps, workoutId);
-        _exerciseUtil.updateRepExercise(exercise);
+        TimedExercise exercise = new TimedExercise(exerciseId, name, sets, weight, time, workoutId);
+        _exerciseUtil.updateTimedExercise(exercise);
 
         Intent intent = new Intent(this, EditWorkoutActivity.class);
         intent.putExtra("workoutId", workoutId);

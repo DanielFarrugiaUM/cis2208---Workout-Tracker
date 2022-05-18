@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cis2208WorkoutTracker">
         <activity
+            android:name=".ui.workouts.EditTimedExerciseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.workouts.EditRepExerciseActivity"
             android:exported="false"
-            android:parentActivityName=".ui.workouts.EditWorkoutActivity"/>
+            android:parentActivityName=".ui.workouts.EditWorkoutActivity" />
         <activity
             android:name=".ui.workouts.AddTimedExerciseActivity"
             android:exported="false"
-            android:parentActivityName=".ui.workouts.EditWorkoutActivity"/>
+            android:parentActivityName=".ui.workouts.EditWorkoutActivity" />
         <activity
             android:name=".ui.workouts.AddRepExerciseActivity"
             android:exported="false"
