@@ -248,6 +248,61 @@ public class ExerciseUtility {
         return exercise;
     }
 
+    //Get a timed exercise by id
+    //returns null if not found
+    public Exercise getTimedExerciseById(long id){
+        SQLiteDatabase db = _dbHelper.getReadableDatabase();
+
+        String[] projection = {
+                BaseColumns._ID,
+                nameCol,
+                setsCol,
+                timeCol,
+                weightCol,
+                workoutFkCol
+        };
+        // WHERE "fk" = condition
+        String selection = BaseColumns._ID + " = ?";
+        String[] selectionArgs = { Long.toString(id) };
+
+        Cursor cursor = db.query(
+                timedTable,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        TimedExercise exercise = null;
+
+        while (cursor.moveToNext()){
+            String name = cursor.getString(
+                    cursor.getColumnIndexOrThrow(nameCol)
+            );
+            int sets = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(setsCol)
+            );
+            int totalSeconds = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(timeCol)
+            );
+            double weight = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(weightCol)
+            );
+            long workoutFK = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(workoutFkCol)
+            );
+
+            //Build the time
+            int minutes = TimedExercise.getMinutes(totalSeconds);
+            int seconds = TimedExercise.getRemainderSeconds(totalSeconds);
+            Time time = new Time(0, minutes, seconds);
+            exercise = new TimedExercise(id, name, sets, weight, time, workoutFK);
+        }
+        cursor.close();
+        return exercise;
+    }
     //Deletions--------------------------------------------------------------
     //Delete a rep exercise by id
     public void removeRepExerciseById(long id){
@@ -277,5 +332,18 @@ public class ExerciseUtility {
         values.put(repsCol, exercise.getNoOfReps());
         values.put(weightCol, exercise.getWeight());
         db.update(repsTable, values, whereClause, whereArgs);
+    }
+
+    public void updateTimedExercise(TimedExercise exercise){
+        long id = exercise.getId();
+        SQLiteDatabase db = _dbHelper.getWritableDatabase();
+        String whereClause = BaseColumns._ID + "=?";
+        String[] whereArgs = { Long.toString(id) };
+        ContentValues values = new ContentValues();
+        values.put(nameCol, exercise.getName());
+        values.put(setsCol, exercise.getNoOfSets());
+        values.put(timeCol, exercise.getTotalSeconds());
+        values.put(weightCol, exercise.getWeight());
+        db.update(timedTable, values, whereClause, whereArgs);
     }
 }
