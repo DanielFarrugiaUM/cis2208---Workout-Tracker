@@ -13,7 +13,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //Not that SQL statements separated by a ; cannot be executed with one
     //db.execSQL() call
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 9;
     public static final String DATABASE_NAME = "workout_manager.db";
     //Workouts Table
     private final String _workoutsTableName = WorkoutsContract.WorkoutEntry.TABLE_NAME;
@@ -27,9 +27,17 @@ public class DbHelper extends SQLiteOpenHelper {
     private final String _eWorkoutId = ExercisesContract.ExerciseEntry.COLUMN_NAME_WORKOUT;
     private final String _eReps = ExercisesContract.ExerciseEntry.COLUMN_NAME_REPS;
     private final String _eTime = ExercisesContract.ExerciseEntry.COLUMN_NAME_TIME;
+    private final String _pragma = "PRAGMA foreign_keys = ON";
 
     public DbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    //Important for DELETE CASCADE to work
+    @Override
+    public void onOpen(SQLiteDatabase db){
+        super.onOpen(db);
+        db.execSQL(_pragma);
     }
 
     @Override
@@ -68,7 +76,12 @@ public class DbHelper extends SQLiteOpenHelper {
                 + _eWorkoutId + " INTEGER, "
                 + _eSets + " INTEGER, "
                 + _eWeight + " NUMERIC, "
-                + _eReps + " INTEGER);";
+                + _eReps + " INTEGER, "
+                + "CONSTRAINT fk_workouts_rep "
+                + "FOREIGN KEY (" + _eWorkoutId + ") "
+                + "REFERENCES " + _workoutsTableName + "("+ WorkoutsContract.WorkoutEntry._ID +") "
+                + "ON DELETE CASCADE"
+                + ");";
     }
 
     private String createTimedExerciseTable(){
@@ -77,8 +90,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 + _eName + " varchar, "
                 + _eWorkoutId + " INTEGER, "
                 + _eSets + " INTEGER, "
-                + _eWeight + " INTEGER, "
-                + _eTime + " INTEGER);"; //WILL NEED TO CONVERT TIME
+                + _eWeight + " NUMERIC, "
+                + _eTime + " INTEGER, "
+                + "CONSTRAINT fk_workouts_timed "
+                + "FOREIGN KEY (" + _eWorkoutId + ") "
+                + "REFERENCES " + _workoutsTableName + "("+ WorkoutsContract.WorkoutEntry._ID +") "
+                + "ON DELETE CASCADE"
+                + ");";
     }
 
     private String dropWorkoutsTable(){

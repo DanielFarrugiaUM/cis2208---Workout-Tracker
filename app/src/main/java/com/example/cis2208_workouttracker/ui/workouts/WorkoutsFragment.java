@@ -104,7 +104,7 @@ public class WorkoutsFragment extends Fragment {
     }
 
     private void setUpRecyclerView() {
-        workoutsAdapter = new WorkoutsAdapter(workouts);
+        workoutsAdapter = new WorkoutsAdapter(workouts, this.getActivity());
         workoutsView.setAdapter(workoutsAdapter);
         workoutsView.setLayoutManager(
                 new LinearLayoutManager(workoutsView.getContext())

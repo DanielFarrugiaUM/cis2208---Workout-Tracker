@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.backend.DbHelper;
+import com.example.cis2208_workouttracker.backend.ExerciseUtility;
+import com.example.cis2208_workouttracker.backend.WorkoutsUtility;
 import com.example.cis2208_workouttracker.domainModels.Workout;
 import com.example.cis2208_workouttracker.ui.workouts.EditWorkoutActivity;
 
@@ -22,9 +24,15 @@ public class WorkoutsAdapter extends
         RecyclerView.Adapter<WorkoutsAdapter.ViewHolder> {
 
     private List<Workout> workouts;
+    private final Context _context;
+    private final DbHelper _dbHelper;
+    private final WorkoutsUtility _workoutsUtility;
 
-    public WorkoutsAdapter(List<Workout> workouts){
+    public WorkoutsAdapter(List<Workout> workouts, Context context){
         this.workouts = workouts;
+        _context = context;
+        _dbHelper = new DbHelper(_context);
+        _workoutsUtility = new WorkoutsUtility(_dbHelper);
     }
 
     @NonNull
@@ -62,12 +70,18 @@ public class WorkoutsAdapter extends
             deleteBtn = workoutsView.findViewById(R.id.workout_delete_btn);
             editBtn = workoutsView.findViewById(R.id.workout_edit_btn);
             startBtn = workoutsView.findViewById(R.id.workout_start_btn);
-
+            deleteBtn.setOnClickListener(view -> onDeleteClick(workoutsView));
             editBtn.setOnClickListener(view -> onEditClick(workoutsView));
         }
 
-        public void onDeleteClick(long id){
-
+        public void onDeleteClick(View workoutsView){
+            int pos = getAdapterPosition();
+            Workout workout = workouts.get(pos);
+            long workoutId = workout.getId();
+            _workoutsUtility.removeWorkoutById(workoutId);
+            //Remove from live data and signal recycler view
+            workouts.remove(workout);
+            notifyDataSetChanged();
         }
 
         public void onEditClick(View workoutsView){
