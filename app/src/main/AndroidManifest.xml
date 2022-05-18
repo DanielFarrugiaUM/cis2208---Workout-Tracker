@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cis2208WorkoutTracker">
         <activity
+            android:name=".ui.workouts.EditRepExerciseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.workouts.AddTimedExerciseActivity"
             android:exported="false" />
         <activity

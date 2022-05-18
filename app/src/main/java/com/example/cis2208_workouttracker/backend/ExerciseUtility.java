@@ -194,6 +194,60 @@ public class ExerciseUtility {
         return exercises;
     }
 
+    //Get a rep exercise by id
+    //returns null if not found
+    public Exercise getRepExerciseById(long id){
+        SQLiteDatabase db = _dbHelper.getReadableDatabase();
+
+        String[] projection = {
+                BaseColumns._ID,
+                nameCol,
+                setsCol,
+                repsCol,
+                weightCol,
+                workoutFkCol
+        };
+        // WHERE "id" = condition
+        String selection = BaseColumns._ID + " = ?";
+        String[] selectionArgs = { Long.toString(id) };
+
+        Cursor cursor = db.query(
+                repsTable,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        RepExercise exercise = null;
+
+        while (cursor.moveToNext()){
+            long exerciseId = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(BaseColumns._ID)
+            );
+            String name = cursor.getString(
+                    cursor.getColumnIndexOrThrow(nameCol)
+            );
+            int sets = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(setsCol)
+            );
+            int reps = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(repsCol)
+            );
+            double weight = cursor.getDouble(
+                    cursor.getColumnIndexOrThrow(weightCol)
+            );
+            long workoutFK = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(workoutFkCol)
+            );
+            exercise = new RepExercise(exerciseId, name, sets, weight, reps, workoutFK);
+        }
+        cursor.close();
+        return exercise;
+    }
+
     //Deletions--------------------------------------------------------------
     //Delete a rep exercise by id
     public void removeRepExerciseById(long id){
@@ -209,5 +263,19 @@ public class ExerciseUtility {
         String whereClause = BaseColumns._ID + "=?";
         String[] whereArgs = { Long.toString(id) };
         db.delete(timedTable, whereClause, whereArgs);
+    }
+
+    //Updates----------------------------------------------------------------
+    public void updateRepExercise(RepExercise exercise){
+        long id = exercise.getId();
+        SQLiteDatabase db = _dbHelper.getWritableDatabase();
+        String whereClause = BaseColumns._ID + "=?";
+        String[] whereArgs = { Long.toString(id) };
+        ContentValues values = new ContentValues();
+        values.put(nameCol, exercise.getName());
+        values.put(setsCol, exercise.getNoOfSets());
+        values.put(repsCol, exercise.getNoOfReps());
+        values.put(weightCol, exercise.getWeight());
+        db.update(repsTable, values, whereClause, whereArgs);
     }
 }

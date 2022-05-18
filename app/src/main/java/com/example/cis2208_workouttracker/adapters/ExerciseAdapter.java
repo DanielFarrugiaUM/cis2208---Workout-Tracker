@@ -1,6 +1,7 @@
 package com.example.cis2208_workouttracker.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.cis2208_workouttracker.domainModels.Exercise;
 import com.example.cis2208_workouttracker.domainModels.RepExercise;
 import com.example.cis2208_workouttracker.domainModels.TimedExercise;
 import com.example.cis2208_workouttracker.domainModels.Workout;
+import com.example.cis2208_workouttracker.ui.workouts.EditRepExerciseActivity;
 
 import java.util.List;
 
@@ -93,9 +95,11 @@ public class ExerciseAdapter extends
             repsOrTimeLabelTextView = exercisesView.findViewById(R.id.reps_or_time_label);
             repsOrTimeValueTextView = exercisesView.findViewById(R.id.reps_or_time);
             weightValueTextView = exercisesView.findViewById(R.id.weight);
+            //Buttons
             deleteBtn = exercisesView.findViewById(R.id.rep_ex_delete_btn);
             editBtn = exercisesView.findViewById(R.id.rep_ex_edit_btn);
             deleteBtn.setOnClickListener(view -> onDeleteClick(exercisesView));
+            editBtn.setOnClickListener(view -> onEditClick(exercisesView));
         }
 
         public void onDeleteClick(View exerciseView){
@@ -112,6 +116,20 @@ public class ExerciseAdapter extends
             //Remove the workout from the adapter
             exercises.remove(exercise);
             notifyDataSetChanged();
+        }
+
+        public void onEditClick(View exerciseView){
+            int pos = getAdapterPosition();
+            Exercise exercise = exercises.get(pos);
+            long id = exercise.getId();
+            //Decide which activity to start
+            if(exercise instanceof RepExercise){
+                Intent intent = new Intent(_context, EditRepExerciseActivity.class);
+                intent.putExtra("exerciseId", exercise.getId());
+                _context.startActivity(intent);
+            }else if(exercise instanceof TimedExercise){
+                //do the same but with Timed
+            }
         }
     }
 }

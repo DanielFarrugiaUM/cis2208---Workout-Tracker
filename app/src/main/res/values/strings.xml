@@ -38,6 +38,7 @@
     <string name="minutes_label">Minutes</string>
     <string name="weight_label">Weight</string>
     <string name="add_rep_heading">Add Repetition Exercise</string>
+    <string name="edit_exercise_heading">Edit Exercise</string>
     <string name="add_timed_heading">Add Timed Exercise</string>
     <string name="ex_name_hint">Exercise Name</string>
 
