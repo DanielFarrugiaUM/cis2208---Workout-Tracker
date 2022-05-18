@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.backend.DbHelper;
 import com.example.cis2208_workouttracker.backend.ExerciseUtility;
-import com.example.cis2208_workouttracker.backend.WorkoutsUtility;
 import com.example.cis2208_workouttracker.domainModels.RepExercise;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -20,7 +18,7 @@ public class AddRepExerciseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_rep_exercise);
+        setContentView(R.layout.activity_add_edit_rep_exercise);
 
         Button confirmBtn = findViewById(R.id.confirm_btn);
         confirmBtn.setOnClickListener(this::onClickConfirm);
