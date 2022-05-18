@@ -109,6 +109,9 @@ public class ExerciseAdapter extends
             }else if(exercise instanceof TimedExercise){
                 _exerciseUtility.removeTimedExerciseById(id);
             }
+            //Remove the workout from the adapter
+            exercises.remove(exercise);
+            notifyDataSetChanged();
         }
     }
 }
