@@ -17,6 +17,7 @@ import com.example.cis2208_workouttracker.backend.ExerciseUtility;
 import com.example.cis2208_workouttracker.backend.WorkoutsUtility;
 import com.example.cis2208_workouttracker.domainModels.Workout;
 import com.example.cis2208_workouttracker.ui.workouts.EditWorkoutActivity;
+import com.example.cis2208_workouttracker.ui.workouts.PerformWorkoutActivity;
 
 import java.util.List;
 
@@ -70,10 +71,21 @@ public class WorkoutsAdapter extends
             deleteBtn = workoutsView.findViewById(R.id.workout_delete_btn);
             editBtn = workoutsView.findViewById(R.id.workout_edit_btn);
             startBtn = workoutsView.findViewById(R.id.workout_start_btn);
+
+            startBtn.setOnClickListener(view -> onStartClick(workoutsView));
             deleteBtn.setOnClickListener(view -> onDeleteClick(workoutsView));
             editBtn.setOnClickListener(view -> onEditClick(workoutsView));
         }
 
+        public void onStartClick(View workoutsView){
+            int pos = getAdapterPosition();
+            Workout workout = workouts.get(pos);
+            long workoutId = workout.getId();
+            Intent intent = new Intent(workoutsView.getContext(), PerformWorkoutActivity.class);
+            intent.putExtra("workoutId", workoutId);
+            workoutsView.getContext().startActivity(intent);
+
+        }
         public void onDeleteClick(View workoutsView){
             int pos = getAdapterPosition();
             Workout workout = workouts.get(pos);

@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cis2208WorkoutTracker">
         <activity
+            android:name=".ui.workouts.PerformWorkoutActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".ui.workouts.EditTimedExerciseActivity"
             android:exported="false" />
         <activity
