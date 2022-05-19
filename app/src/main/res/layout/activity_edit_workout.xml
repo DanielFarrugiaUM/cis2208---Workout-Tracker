@@ -5,15 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.workouts.EditWorkoutActivity">
-
-    <TextView
-        android:id="@+id/workout_name_edit"
+    <LinearLayout
+        android:id="@+id/edit_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/workout_name_empty"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/workout_name_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/workout_name_empty"
+            app:errorEnabled="true"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+                <!--style="@style/Widget.Material3.Button.ElevatedButton"-->
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/updateNameBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_w_name"
+            android:enabled="false"/>
+
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exercise_list"
@@ -23,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workout_name_edit" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_name_layout" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

@@ -13,6 +13,7 @@
     <string name="btn_start">Start</string>
     <string name="cancel">Cancel</string>
     <string name="finish">Finish Workout</string>
+    <string name="update_w_name">Update Name</string>
     <string-array name="exercise_types">
         <item>Repetition Exercise</item>
         <item>Timed Exercise</item>
@@ -27,7 +28,7 @@
     <string name="workout_add_hint">Enter Workout name</string>
 
     <!--EditWorkoutActivity-->
-    <string name="workout_name_empty">Workout Not Found</string>
+    <string name="workout_name_empty">Enter Workout Name</string>
 
     <!--Exercise Related Strings-->
     <string name="exercise_name_placeholder">Exercise Name</string>

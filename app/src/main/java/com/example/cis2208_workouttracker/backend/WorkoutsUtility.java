@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 import com.example.cis2208_workouttracker.backend.contracts.WorkoutsContract;
+import com.example.cis2208_workouttracker.domainModels.RepExercise;
 import com.example.cis2208_workouttracker.domainModels.Workout;
 
 import java.util.ArrayList;
@@ -110,5 +111,16 @@ public class WorkoutsUtility {
     public void removeAll(){
         SQLiteDatabase db = _dbHelper.getWritableDatabase();
         db.delete(WorkoutsContract.WorkoutEntry.TABLE_NAME, null, null);
+    }
+
+    //Updates----------------------------------------------------------------
+    public void updateWorkoutById(long id, String name){
+        SQLiteDatabase db = _dbHelper.getWritableDatabase();
+        String whereClause = BaseColumns._ID + "=?";
+        String[] whereArgs = { Long.toString(id) };
+        ContentValues values = new ContentValues();
+        values.put(WorkoutsContract.WorkoutEntry.COLUMN_NAME_NAME, name);
+
+        db.update(WorkoutsContract.WorkoutEntry.TABLE_NAME, values, whereClause, whereArgs);
     }
 }
