@@ -53,12 +53,12 @@
                 android:id="@+id/reps_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/reps"
+                android:labelFor="@+id/time"
                 android:text="@string/reps_time"
                 />
             <TextView
                 style="@style/ExerciseValue"
-                android:id="@+id/reps"
+                android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""

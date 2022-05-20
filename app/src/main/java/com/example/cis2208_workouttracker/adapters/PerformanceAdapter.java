@@ -6,7 +6,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -114,7 +113,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             nameTextView = itemView.findViewById(R.id.rep_ex_name);
             setsValueTextView = itemView.findViewById(R.id.sets);
-            repsValueTextView = itemView.findViewById(R.id.reps);
+            repsValueTextView = itemView.findViewById(R.id.time);
             weightValueTextView = itemView.findViewById(R.id.weight);
 
             checkBox = itemView.findViewById(R.id.checkbox);

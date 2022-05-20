@@ -32,7 +32,7 @@ public class HistoryUtility {
         values.put(setsCol, historyItem.getNoOfSets());
         values.put(repsCol, historyItem.getReps());
         values.put(weightCol, historyItem.getWeight());
-        values.put(dateCol, historyItem.getDate().getDate());
+        values.put(dateCol, historyItem.getDate().getTime());
         return db.insert(
                 _rHistTableName,
                 null,
@@ -47,7 +47,7 @@ public class HistoryUtility {
         values.put(setsCol, historyItem.getNoOfSets());
         values.put(timeCol, historyItem.getTotalSeconds());
         values.put(weightCol, historyItem.getWeight());
-        values.put(dateCol, historyItem.getDate().getDate());
+        values.put(dateCol, historyItem.getDate().getTime());
         return db.insert(
                 _tHistTableName,
                 null,
