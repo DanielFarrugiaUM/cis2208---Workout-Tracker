@@ -7,11 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.cis2208_workouttracker.MainActivity;
 import com.example.cis2208_workouttracker.R;
-import com.example.cis2208_workouttracker.adapters.ExerciseAdapter;
 import com.example.cis2208_workouttracker.adapters.PerformanceAdapter;
+import com.example.cis2208_workouttracker.backend.DbHelper;
+import com.example.cis2208_workouttracker.backend.HistoryUtility;
 import com.example.cis2208_workouttracker.domainModels.Exercise;
+import com.example.cis2208_workouttracker.domainModels.HistoryItem;
+import com.example.cis2208_workouttracker.domainModels.RepExercise;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +37,8 @@ public class PerformWorkoutActivity extends AppCompatActivity {
         exerciseViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
         exercisesView = this.findViewById(R.id.perform_exercise_list);
 
+        ExtendedFloatingActionButton finishedBtn = findViewById(R.id.finished_btn);
+        finishedBtn.setOnClickListener(this::onClickFinished);
         setUpRecyclerView();
         populateScreen();
     }
@@ -56,5 +64,24 @@ public class PerformWorkoutActivity extends AppCompatActivity {
         exercisesView.setLayoutManager(
                 new LinearLayoutManager(exercisesView.getContext())
         );
+    }
+
+    private void onClickFinished(View view) {
+        DbHelper dbHelper = new DbHelper(this);
+        HistoryUtility histUtil = new HistoryUtility(dbHelper);
+
+        //Write all the ticked exercise to DB
+        for(Exercise exercise: selected){
+            HistoryItem tempItem = new HistoryItem(exercise);
+            //Call Db methods
+            if(tempItem.exercise instanceof RepExercise){
+                histUtil.insertRepHistoryItem(tempItem);
+            }else{
+                histUtil.insertTimedHistoryItem(tempItem);
+            }
+        }
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

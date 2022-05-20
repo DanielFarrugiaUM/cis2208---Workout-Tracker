@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.cis2208_workouttracker.backend.contracts.ExercisesContract;
+import com.example.cis2208_workouttracker.backend.contracts.HistoryItemContract;
 import com.example.cis2208_workouttracker.backend.contracts.WorkoutsContract;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -13,12 +14,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
     //Not that SQL statements separated by a ; cannot be executed with one
     //db.execSQL() call
-    public static final int DATABASE_VERSION = 9;
+    public static final int DATABASE_VERSION = 10;
     public static final String DATABASE_NAME = "workout_manager.db";
-    //Workouts Table
+    //Workouts Table properties
     private final String _workoutsTableName = WorkoutsContract.WorkoutEntry.TABLE_NAME;
     private final String _wName = WorkoutsContract.WorkoutEntry.COLUMN_NAME_NAME;
-    //Exercises Table
+    //Exercises Table properties
     private final String _repExercisesTableName = ExercisesContract.ExerciseEntry.TABLE_NAME_REPS;
     private final String _timedExercisesTableName = ExercisesContract.ExerciseEntry.TABLE_NAME_TIMED;
     private final String _eName = ExercisesContract.ExerciseEntry.COLUMN_NAME_NAME;
@@ -27,6 +28,16 @@ public class DbHelper extends SQLiteOpenHelper {
     private final String _eWorkoutId = ExercisesContract.ExerciseEntry.COLUMN_NAME_WORKOUT;
     private final String _eReps = ExercisesContract.ExerciseEntry.COLUMN_NAME_REPS;
     private final String _eTime = ExercisesContract.ExerciseEntry.COLUMN_NAME_TIME;
+    //History Table properties
+    private final  String _rHistTableName = HistoryItemContract.HistoryEntry.TABLE_NAME_REPS;
+    private final String _tHistTableName = HistoryItemContract.HistoryEntry.TABLE_NAME_TIMED;
+    private final String _hisName = HistoryItemContract.HistoryEntry.COLUMN_NAME_NAME;
+    private final String _histReps = HistoryItemContract.HistoryEntry.COLUMN_NAME_REPS;
+    private final String _histWeight = HistoryItemContract.HistoryEntry.COLUMN_NAME_WEIGHT;
+    private final String _histSets = HistoryItemContract.HistoryEntry.COLUMN_NAME_SETS;
+    private final String _histTime = HistoryItemContract.HistoryEntry.COLUMN_NAME_TIME;
+    private final String _histDate = HistoryItemContract.HistoryEntry.COLUMN_NAME_DATE;
+    //Pragma for onOpen()
     private final String _pragma = "PRAGMA foreign_keys = ON";
 
     public DbHelper(Context context){
@@ -45,6 +56,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createWorkoutsTable());
         db.execSQL(createRepExercisesTable());
         db.execSQL(createTimedExerciseTable());
+        db.execSQL(createTimedHistoryTable());
+        db.execSQL(createRepHistoryTable());
     }
 
     @Override
@@ -53,10 +66,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(dropWorkoutsTable());
         db.execSQL(dropRepExercisesTable());
         db.execSQL(dropTimedExercisesTable());
+        db.execSQL(dropRepHistTable());
+        db.execSQL(dropTimedHistTable());
         //Create new ones
         db.execSQL(createWorkoutsTable());
         db.execSQL(createRepExercisesTable());
         db.execSQL(createTimedExerciseTable());
+        db.execSQL(createTimedHistoryTable());
+        db.execSQL(createRepHistoryTable());
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -97,6 +114,38 @@ public class DbHelper extends SQLiteOpenHelper {
                 + "REFERENCES " + _workoutsTableName + "("+ WorkoutsContract.WorkoutEntry._ID +") "
                 + "ON DELETE CASCADE"
                 + ");";
+    }
+
+    private String createRepHistoryTable(){
+        return "CREATE TABLE " + _rHistTableName + " ("
+                + HistoryItemContract.HistoryEntry._ID + " INTEGER PRIMARY KEY, "
+                + _histDate + " INTEGER, "
+                + _hisName + " varchar, "
+                + _histSets + " INTEGER, "
+                + _histReps + " INTEGER, "
+                + _histWeight + " NUMERIC"
+                + ");";
+    }
+
+    private String createTimedHistoryTable(){
+        return "CREATE TABLE " + _tHistTableName + " ("
+                + HistoryItemContract.HistoryEntry._ID + " INTEGER PRIMARY KEY, "
+                + _histDate + " INTEGER, "
+                + _hisName + " varchar, "
+                + _histSets + " INTEGER, "
+                + _histTime + " INTEGER, "
+                + _histWeight + " NUMERIC"
+                + ");";
+    }
+
+    private String dropRepHistTable(){
+        return "DROP TABLE IF EXISTS "
+                + _rHistTableName + ";";
+    }
+
+    private String dropTimedHistTable(){
+        return "DROP TABLE IF EXISTS "
+                + _tHistTableName + ";";
     }
 
     private String dropWorkoutsTable(){
