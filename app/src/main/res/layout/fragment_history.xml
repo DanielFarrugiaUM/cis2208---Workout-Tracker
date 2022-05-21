@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.history.HistoryFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,18 +12,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/history_fragment_title" />
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/create_timed_sets"
+            android:id="@+id/date_input_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/sets_label"
-            android:padding="5dp">
+            android:hint="@string/date_not_selected"
+            android:padding="5dp"
+            android:enabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/date"
@@ -35,7 +32,10 @@
             android:id="@+id/pick_date_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/update_w_name"/>
+            android:text="@string/find_date"
+            app:icon="@drawable/ic_baseline_calendar_today_24"
+            android:layout_gravity="center"
+            android:padding="5dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/items_list"

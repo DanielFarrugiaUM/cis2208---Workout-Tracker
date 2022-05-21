@@ -25,7 +25,6 @@ public class HistoryItemsViewModel extends ViewModel {
     }
 
     public MutableLiveData<List<HistoryItem>> getItems(Context context, long date){
-
         DbHelper dbHelper = new DbHelper(context);
         HistoryUtility histUtil = new HistoryUtility(dbHelper);
         ArrayList<HistoryItem> newItems = histUtil.getHistItemsByDate(date);

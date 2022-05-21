@@ -61,4 +61,8 @@
     <string name="not_0">Needs to be greater than 0</string>
     <string name="time_err">Time Required</string>
 
+    <!--History-->
+    <string name="date_not_selected">Use calendar to select date</string>
+    <string name="find_date">Open Calendar</string>
+
 </resources>

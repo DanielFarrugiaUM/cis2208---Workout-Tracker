@@ -122,6 +122,9 @@ public class HistoryFragment extends Fragment {
                 System.out.println(selection + offset);
                 items.clear(); //Remove items currently being shown
                 fetchItems(selection + offset); //Get the new items
+
+                String dateString = datePicker.getHeaderText();
+                dateText.setText(dateString);
             }
         });
 
@@ -136,6 +139,8 @@ public class HistoryFragment extends Fragment {
     }
 
     private void updateItemsList(List<HistoryItem> historyItems) {
+        //Do not simply add items when date changes
+        items.clear();
         items.addAll(historyItems);
         adapter.notifyDataSetChanged();
     }
