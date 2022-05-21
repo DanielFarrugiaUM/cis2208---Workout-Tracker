@@ -28,6 +28,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -96,8 +97,6 @@ public class HistoryFragment extends Fragment {
         pickDateBtn = root.findViewById(R.id.pick_date_btn);
         dateText = root.findViewById(R.id.date);
 
-        setUpRecyclerView();
-        fetchItems();
         //Set up date picker
         MaterialDatePicker.Builder<Long> materialDateBuilder = MaterialDatePicker.Builder.datePicker();
         materialDateBuilder.setTitleText("SELECT A DATE");
@@ -113,16 +112,26 @@ public class HistoryFragment extends Fragment {
         datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
             @Override
             public void onPositiveButtonClick(Long selection) {
-                dateText.setText(datePicker.getHeaderText());
-                Date date = new Date(selection);
-                System.out.println(date.toString());
+                //Need to set our time offset to GMT
+                TimeZone timeZoneUTC = TimeZone.getDefault();
+                int offset = timeZoneUTC.getOffset(
+                        new Date(System.currentTimeMillis()).getTime()
+                ) * -1;
+
+                System.out.println(selection);
+                System.out.println(selection + offset);
+                items.clear(); //Remove items currently being shown
+                fetchItems(selection + offset); //Get the new items
             }
         });
+
+        setUpRecyclerView();
+
         return root;
     }
 
-    private void fetchItems() {
-        itemsViewModel.getItems(getActivity()).observe(getViewLifecycleOwner(),
+    private void fetchItems(long date) {
+        itemsViewModel.getItems(getActivity(), date).observe(getViewLifecycleOwner(),
                 this::updateItemsList);
     }
 

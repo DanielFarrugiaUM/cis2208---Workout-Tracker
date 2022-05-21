@@ -5,6 +5,7 @@ import android.os.Build;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Calendar;
 
 public class HistoryItem {
     //Cannot use the new java.time.LocalDate due to SDK21
@@ -56,8 +57,14 @@ public class HistoryItem {
         this.exercise.setWeight(weight);
     }
 
-    public Date getDate() {
-        return date;
+    public long getDate() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime().getTime();
     }
 
     public void setDate(long value){
