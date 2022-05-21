@@ -2,6 +2,7 @@ package com.example.cis2208_workouttracker.ui.workouts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -20,19 +21,22 @@ public class AddRepExerciseActivity extends AppCompatActivity {
     private TextInputEditText setsInput;
     private TextInputEditText repsInput;
     private TextInputEditText weightInput;
+    private Intent intent;
+    private long workoutId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_rep_exercise);
+        getSupportActionBar().setTitle(R.string.add_exercise_title);
 
         Button confirmBtn = findViewById(R.id.confirm_btn);
         confirmBtn.setOnClickListener(this::onClickConfirm);
     }
 
     private void onClickConfirm(View view) {
-        Intent intent = getIntent();
-        long workoutId = intent.getLongExtra("workoutId", -1);
+         intent = getIntent();
+         workoutId = intent.getLongExtra("workoutId", -1);
 
         nameInput = findViewById(R.id.rep_name_input);
         String name = nameInput.getEditableText().toString();

@@ -32,7 +32,9 @@ public class PerformWorkoutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Intent intent = getIntent();
+        String wName = intent.getStringExtra("workoutName");
+        getSupportActionBar().setTitle(wName);
         setContentView(R.layout.activity_perform_workout);
         exerciseViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
         exercisesView = this.findViewById(R.id.perform_exercise_list);

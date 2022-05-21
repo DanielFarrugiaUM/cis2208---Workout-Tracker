@@ -83,6 +83,7 @@ public class WorkoutsAdapter extends
             long workoutId = workout.getId();
             Intent intent = new Intent(workoutsView.getContext(), PerformWorkoutActivity.class);
             intent.putExtra("workoutId", workoutId);
+            intent.putExtra("workoutName", workout.getName());
             workoutsView.getContext().startActivity(intent);
 
         }

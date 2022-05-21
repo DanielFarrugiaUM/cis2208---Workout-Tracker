@@ -25,12 +25,15 @@
     <string name="add_workout_btn_desc">Add Workout</string>
 
     <!--AddWorkoutActivity-->
+    <string name="add_workout">Add Workout</string>
     <string name="workout_add_hint">Enter Workout name</string>
 
     <!--EditWorkoutActivity-->
+    <string name="edit_workout_title">Edit Workout</string>
     <string name="workout_name_empty">Enter Workout Name</string>
 
     <!--Exercise Related Strings-->
+    <string name="add_exercise_title">Add Exercise</string>
     <string name="exercise_name_placeholder">Exercise Name</string>
     <string name="sets_label">Sets</string>
     <string name="reps_time">Repetitions</string>
@@ -56,5 +59,6 @@
     <string name="required">Required</string>
     <string name="required_weight">Required, enter 0 in case of body weight</string>
     <string name="not_0">Needs to be greater than 0</string>
+    <string name="time_err">Time Required</string>
 
 </resources>

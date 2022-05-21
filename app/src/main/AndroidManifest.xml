@@ -15,7 +15,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ui.workouts.EditTimedExerciseActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.workouts.EditWorkoutActivity"/>
         <activity
             android:name=".ui.workouts.EditRepExerciseActivity"
             android:exported="false"
@@ -31,7 +32,7 @@
         <activity
             android:name=".ui.workouts.EditWorkoutActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ui.workouts.AddWorkoutActivity"
             android:exported="false"

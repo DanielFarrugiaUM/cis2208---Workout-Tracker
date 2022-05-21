@@ -3,6 +3,7 @@ package com.example.cis2208_workouttracker.ui.workouts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +24,17 @@ public class EditTimedExerciseActivity extends AppCompatActivity {
     long workoutId;
     DbHelper _dbHelper;
     ExerciseUtility _exerciseUtil;
+    private TextInputEditText nameInput;
+    private TextInputEditText setsInput;
+    private TextInputEditText minutesInput;
+    private TextInputEditText secondsInput;
+    TextInputEditText weightInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_add_edit_timed_exercise);
+        getSupportActionBar().setTitle(R.string.edit_exercise_heading);
         //Get the id from the incoming intent
         Intent intent = getIntent();
         exerciseId = intent.getLongExtra("exerciseId", -1);
@@ -49,10 +55,10 @@ public class EditTimedExerciseActivity extends AppCompatActivity {
         TextView headingView = findViewById(R.id.create_edit_timed_heading);
         headingView.setText(R.string.edit_exercise_heading);
         //Populate input views
-        TextInputEditText nameInput = findViewById(R.id.timed_name_input);
+        nameInput = findViewById(R.id.timed_name_input);
         nameInput.setText(exercise.getName());
 
-        TextInputEditText setsInput = findViewById(R.id.timed_sets_input);
+        setsInput = findViewById(R.id.timed_sets_input);
         int sets = exercise.getNoOfSets();
         String setsString = String.valueOf(sets);
         setsInput.setText(setsString);
@@ -64,12 +70,12 @@ public class EditTimedExerciseActivity extends AppCompatActivity {
         String minString = String.valueOf(minutes);
         String secString = String.valueOf(seconds);
 
-        TextInputEditText minutesInput = findViewById(R.id.minutes_input);
+        minutesInput = findViewById(R.id.minutes_input);
         minutesInput.setText(minString);
-        TextInputEditText secondsInput = findViewById(R.id.seconds_input);
+        secondsInput = findViewById(R.id.seconds_input);
         secondsInput.setText(secString);
 
-        TextInputEditText weightInput = findViewById(R.id.timed_weight_input);
+        weightInput = findViewById(R.id.timed_weight_input);
         double weight = exercise.getWeight();
         String weightString = Double.toString(weight);
         weightInput.setText(weightString);
@@ -77,32 +83,89 @@ public class EditTimedExerciseActivity extends AppCompatActivity {
 
     private void onClickConfirm(View view) {
         //Get the new values
-        TextInputEditText nameInput = findViewById(R.id.timed_name_input);
         String name = nameInput.getEditableText().toString();
 
-        TextInputEditText setsInput = findViewById(R.id.timed_sets_input);
         String setsValue = setsInput.getEditableText().toString();
-        int sets = Integer.parseInt(setsValue);
-        //Minutes and seconds taken separately to create Time() instance
-        TextInputEditText minutesInput = findViewById(R.id.minutes_input);
+
         String minValue = minutesInput.getEditableText().toString();
-        int min = Integer.parseInt(minValue);
 
-        TextInputEditText secondsInput = findViewById(R.id.seconds_input);
         String secValue = secondsInput.getEditableText().toString();
-        int sec = Integer.parseInt(secValue);
 
-        Time time = new Time(0, min, sec);
-
-        TextInputEditText weightInput = findViewById(R.id.timed_weight_input);
         String weightValue = weightInput.getEditableText().toString();
-        double weight = Double.parseDouble(weightValue);
 
-        TimedExercise exercise = new TimedExercise(exerciseId, name, sets, weight, time, workoutId);
-        _exerciseUtil.updateTimedExercise(exercise);
+        if(verifyInput(setsValue, minValue, secValue)){
+            //Since it is either seconds or minutes, any one of them can be an empty
+            //string after verification, therefore we check for empty strings again
+            int sec = 0;
+            int minutes = 0;
+            if(secValue.length() != 0){
+                sec = Integer.parseInt(secValue);
+            }
+            if(minValue.length() != 0){
+                minutes = Integer.parseInt(minValue);
+            }
+            int sets = Integer.parseInt(setsValue);
+            double weight = Double.parseDouble(weightValue);
+            Time time = new Time(0, minutes, sec);
+            TimedExercise exercise = new TimedExercise(exerciseId, name, sets, weight, time, workoutId);
+            _exerciseUtil.updateTimedExercise(exercise);
 
-        Intent intent = new Intent(this, EditWorkoutActivity.class);
-        intent.putExtra("workoutId", workoutId);
-        startActivity(intent);
+            Intent intent = new Intent(this, EditWorkoutActivity.class);
+            intent.putExtra("workoutId", workoutId);
+            startActivity(intent);
+        }
+
+    }
+
+    private boolean verifyInput(String setsVal, String minutesVal, String secondsVal){
+        //Get the values from strings.xml
+        Resources res = getApplicationContext().getResources();
+        String requiredErr = res.getString(R.string.required);
+        String notZeroErr = res.getString(R.string.not_0);
+        String weightErr = res.getString(R.string.required_weight);
+        String timeErr = res.getString(R.string.time_err);
+        //Check name
+        if(nameInput.length() == 0){
+            nameInput.setError(requiredErr);
+            return false;
+        }
+        //Impossible to have 0 sets or empty field
+        if(setsInput.length() == 0){
+            setsInput.setError(requiredErr);
+            return false;
+        }else{
+            int sets = Integer.parseInt(setsVal);
+            if(sets == 0){
+                setsInput.setError(notZeroErr);
+                return false;
+            }
+        }
+        //No input bill break our Parse line with null
+        if(minutesInput.length() == 0 && secondsInput.length() == 0){
+            secondsInput.setError(timeErr);
+            return false;
+        }
+        //Check if any contains data, if not take it as a 0
+        //We need to check the total
+        int sec = 0;
+        if(secondsInput.length() != 0){
+            sec = Integer.parseInt(secondsVal);
+        }
+        int minutes = 0;
+        if(minutesInput.length() != 0){
+            minutes = Integer.parseInt(minutesVal);
+        }
+        //Check that time is not 0
+        if(minutes + sec == 0){
+            secondsInput.setError(timeErr);
+            return false;
+        }
+        //Weight can be 0 in case of body weight training
+        //but not empty
+        if(weightInput.length() == 0){
+            weightInput.setError(weightErr);
+            return false;
+        }
+        return true;
     }
 }

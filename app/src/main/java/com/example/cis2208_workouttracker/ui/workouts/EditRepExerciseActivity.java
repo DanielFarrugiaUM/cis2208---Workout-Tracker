@@ -33,6 +33,7 @@ public class EditRepExerciseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_rep_exercise);
+        getSupportActionBar().setTitle(R.string.add_exercise_title);
         //Get the id from the incoming intent
         Intent intent = getIntent();
         exerciseId = intent.getLongExtra("exerciseId", -1);
@@ -153,9 +154,13 @@ public class EditRepExerciseActivity extends AppCompatActivity {
         }
         return true;
     }
-
+    //Again did not manage to solve this problem
+    //No way of going back to previous screen with
+    //workout id
     @Override
     public void onBackPressed() {
-        finish();
+        Intent intent = new Intent(this, EditWorkoutActivity.class);
+        intent.putExtra("workoutId", workoutId);
+        startActivity(intent);
     }
 }

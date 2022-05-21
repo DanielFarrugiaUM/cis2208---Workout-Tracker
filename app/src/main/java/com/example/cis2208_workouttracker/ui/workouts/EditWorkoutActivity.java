@@ -38,12 +38,15 @@ public class EditWorkoutActivity extends AppCompatActivity {
     private List<Exercise> exercises = new ArrayList<>();
     private Button updateNameBtn;
     private TextInputEditText workoutNameView;
+    private long workoutId;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_workout);
-        getSupportActionBar().setTitle("Edit Workout");
+        getSupportActionBar().setTitle(R.string.edit_workout_title);
+
         exercisesViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
         exercisesView = this.findViewById(R.id.exercise_list);
         workoutNameView = findViewById(R.id.name_input);
@@ -54,16 +57,41 @@ public class EditWorkoutActivity extends AppCompatActivity {
          updateNameBtn = findViewById(R.id.updateNameBtn);
          updateNameBtn.setOnClickListener(this::onClickUpdateName);
 
+         if(savedInstanceState != null){
+             workoutId = savedInstanceState.getLong("workoutId");
+         }else{
+             intent = getIntent();
+             workoutId = intent.getLongExtra("workoutId", -1);
+         }
+    }
+
+    public void onStart(){
+        super.onStart();
+
         setUpRecyclerView();
         populateScreen();
         setWorkoutName();
     }
+    //I tried to keep state alive so that i can use back button
+    //but was unable to do so
+    //The debugger is enter this function, but still getting a null
+    //saved instance on create!!!
+    @Override
+    public void onSaveInstanceState(Bundle savedInstance){
+        super.onSaveInstanceState(savedInstance);
+        savedInstance.putLong("workoutId", workoutId);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        workoutId = savedInstanceState.getLong("workoutId");
+    }
+
 
     private void populateScreen() {
         //Get the id from previous activity
-        Intent intent = getIntent();
-        long id = intent.getLongExtra("workoutId", -1);
-        exercisesViewModel.getExercises(this, id).observe(
+        exercisesViewModel.getExercises(this, workoutId).observe(
                 this,
                 this::updateExercisesList
         );
@@ -83,14 +111,10 @@ public class EditWorkoutActivity extends AppCompatActivity {
     }
 
     private void setWorkoutName(){
-        //Get the id from previous activity
-        Intent intent = getIntent();
-        long id = intent.getLongExtra("workoutId", -1);
-
         //Get Workout from db
         DbHelper dbHelper = new DbHelper(this);
         WorkoutsUtility workoutsUtility = new WorkoutsUtility(dbHelper);
-        Workout workout = workoutsUtility.getWorkoutById(id);
+        Workout workout = workoutsUtility.getWorkoutById(workoutId);
 
         //Set The name to appear in text view
         //TextInputEditText workoutNameView = findViewById(R.id.name_input);
@@ -117,15 +141,11 @@ public class EditWorkoutActivity extends AppCompatActivity {
     }
 
     private void onClickAdd(View view){
-        Intent intent = getIntent();
-        long workoutIid = intent.getLongExtra("workoutId", -1);
-        DialogFragment dialog = new AddExerciseDialog(workoutIid);
+        DialogFragment dialog = new AddExerciseDialog(workoutId);
         dialog.show(getSupportFragmentManager(), "AddExerciseDialog");
     }
 
     private void onClickUpdateName(View view){
-        Intent intent = getIntent();
-        long workoutId = intent.getLongExtra("workoutId", -1);
         String newName;
         newName = Objects.requireNonNull(workoutNameView.getText()).toString().trim();
         DbHelper dbHelper = new DbHelper(this);
