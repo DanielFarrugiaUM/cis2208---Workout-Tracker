@@ -52,7 +52,9 @@
         examples: plank or sprint.
     </string>
 
-    <!--Exercise Related Strings-->
-
+    <!--Error Strings-->
+    <string name="required">Required</string>
+    <string name="required_weight">Required, enter 0 in case of body weight</string>
+    <string name="not_0">Needs to be greater than 0</string>
 
 </resources>

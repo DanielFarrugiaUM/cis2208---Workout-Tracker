@@ -52,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/sets_label"
-                android:padding="5dp">
+                android:padding="5dp"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/rep_sets_input"
@@ -69,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/reps_label"
-                android:padding="5dp">
+                android:padding="5dp"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/rep_reps_input"
@@ -86,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="@string/weight_label"
-                android:padding="5dp">
+                android:padding="5dp"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/rep_weight_input"

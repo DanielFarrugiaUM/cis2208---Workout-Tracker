@@ -22,6 +22,7 @@ import com.example.cis2208_workouttracker.backend.WorkoutsUtility;
 import com.example.cis2208_workouttracker.domainModels.Exercise;
 import com.example.cis2208_workouttracker.domainModels.Workout;
 import com.example.cis2208_workouttracker.ui.dialogs.AddExerciseDialog;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -36,12 +37,13 @@ public class EditWorkoutActivity extends AppCompatActivity {
     private RecyclerView exercisesView;
     private List<Exercise> exercises = new ArrayList<>();
     private Button updateNameBtn;
-    TextInputEditText workoutNameView;
+    private TextInputEditText workoutNameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_workout);
+        getSupportActionBar().setTitle("Edit Workout");
         exercisesViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
         exercisesView = this.findViewById(R.id.exercise_list);
         workoutNameView = findViewById(R.id.name_input);
