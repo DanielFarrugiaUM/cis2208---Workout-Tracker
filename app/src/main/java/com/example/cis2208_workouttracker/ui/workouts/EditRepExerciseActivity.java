@@ -50,9 +50,6 @@ public class EditRepExerciseActivity extends AppCompatActivity {
     }
 
     private void populateScreen(RepExercise exercise){
-        //Set title to Edit Exercise
-        TextView headingView = findViewById(R.id.create_rep_heading);
-        headingView.setText(R.string.edit_exercise_heading);
         //Populate input views
 
         TextInputEditText nameInput = findViewById(R.id.rep_name_input);

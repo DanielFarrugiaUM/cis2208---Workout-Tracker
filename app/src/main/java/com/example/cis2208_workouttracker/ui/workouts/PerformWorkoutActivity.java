@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toolbar;
 
 import com.example.cis2208_workouttracker.MainActivity;
 import com.example.cis2208_workouttracker.R;

@@ -51,9 +51,6 @@ public class EditTimedExerciseActivity extends AppCompatActivity {
     }
 
     private void populateScreen(TimedExercise exercise){
-        //Set title to Edit Exercise
-        TextView headingView = findViewById(R.id.create_edit_timed_heading);
-        headingView.setText(R.string.edit_exercise_heading);
         //Populate input views
         nameInput = findViewById(R.id.timed_name_input);
         nameInput.setText(exercise.getName());

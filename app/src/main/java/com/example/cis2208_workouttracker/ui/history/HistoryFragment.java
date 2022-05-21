@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.adapters.HistoryItemAdapter;
@@ -122,7 +123,16 @@ public class HistoryFragment extends Fragment {
                 System.out.println(selection + offset);
                 items.clear(); //Remove items currently being shown
                 fetchItems(selection + offset); //Get the new items
-
+                //Give some sign that search worked
+                //in case of empty result
+                if(adapter.getItemCount() == 0){
+                    Toast toast =  Toast.makeText(
+                            getContext(),
+                            "No exercises were found",
+                            Toast.LENGTH_LONG
+                    );
+                    toast.show();
+                }
                 String dateString = datePicker.getHeaderText();
                 dateText.setText(dateString);
             }

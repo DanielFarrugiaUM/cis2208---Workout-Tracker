@@ -10,8 +10,8 @@
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/md_theme_light_primary"
         android:theme="@style/Theme.Cis2208WorkoutTracker.AppBarOverlay">
-
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -21,6 +21,7 @@
             android:padding="@dimen/appbar_padding"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textColor="@color/design_default_color_on_primary"
             android:layout_gravity="center"/>
 
         <com.google.android.material.tabs.TabLayout

@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cis2208_workouttracker.R;
 import com.example.cis2208_workouttracker.adapters.ExerciseAdapter;
@@ -152,5 +153,10 @@ public class EditWorkoutActivity extends AppCompatActivity {
         WorkoutsUtility _workoutsUtil = new WorkoutsUtility(dbHelper);
         _workoutsUtil.updateWorkoutById(workoutId, newName);
         updateNameBtn.setEnabled(false);
+        Toast toast = Toast.makeText(
+                this,
+                "Name changed.",
+                Toast.LENGTH_LONG);
+        toast.show();
     }
 }
