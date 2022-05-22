@@ -6,7 +6,7 @@
             app:defaultValue="kg"
             app:entries="@array/unit_entries"
             app:entryValues="@array/unit_values"
-            app:key="kg"
+            app:key="weight_unit"
             app:title="@string/units_title"
             app:useSimpleSummaryProvider="true" />
 
@@ -15,7 +15,7 @@
     <PreferenceCategory app:title="@string/sync_header">
 
         <SwitchPreferenceCompat
-            app:key="sync"
+            app:key="theme"
             app:title="@string/theme_title" />
     </PreferenceCategory>
 

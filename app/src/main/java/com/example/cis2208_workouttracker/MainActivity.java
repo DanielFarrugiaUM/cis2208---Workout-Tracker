@@ -1,6 +1,8 @@
 package com.example.cis2208_workouttracker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.cis2208_workouttracker.domainModels.Exercise;
@@ -13,6 +15,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +30,7 @@ import com.example.cis2208_workouttracker.databinding.ActivityMainBinding;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //This is way to read the shared preferences
+        //as changed from the settings page
+        //the changes are not implemented yet, but the
+        //idea is to load the resources files, such as
+        //strings.xml and themes.xml and edit their content
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String test = sharedPreferences.getString("weight_unit", "");
 
         topAppBar = (MaterialToolbar) findViewById(R.id.topAppBar);
         setSupportActionBar(topAppBar);
@@ -56,18 +69,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
-
-
-        //FloatingActionButton fab = binding.fab;
-
-/*        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
     }
     //Set up a menu from the relevant xml
     public boolean onCreateOptionsMenu(Menu menu) {
