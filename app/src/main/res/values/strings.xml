@@ -65,5 +65,15 @@
     <!--History-->
     <string name="date_not_selected">Use calendar to select date</string>
     <string name="find_date">Open Calendar</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
+    <!-- Preference Titles -->
+    <string name="units_header">Units</string>
+    <string name="sync_header">Appearance</string>
+
+    <!-- Units Preferences -->
+    <string name="units_title">Weight Unit</string>
+
+    <!-- Appearance Preferences -->
+    <string name="theme_title">Dark Theme</string>
 </resources>

@@ -31,9 +31,11 @@
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/fragment_workouts_list.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/rep_history_item.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/rep_performance_view.xml" value="0.25" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/settings_activity.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/timed_history_item.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/timed_performance_view.xml" value="0.25" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/menu/top_app_bar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/xml/root_preferences.xml" value="0.20018115942028986" />
       </map>
     </option>
   </component>

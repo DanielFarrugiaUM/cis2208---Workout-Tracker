@@ -10,13 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cis2208WorkoutTracker">
         <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".ui.workouts.PerformWorkoutActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ui.workouts.EditTimedExerciseActivity"
             android:exported="false"
-            android:parentActivityName=".ui.workouts.EditWorkoutActivity"/>
+            android:parentActivityName=".ui.workouts.EditWorkoutActivity" />
         <activity
             android:name=".ui.workouts.EditRepExerciseActivity"
             android:exported="false"
@@ -32,7 +37,7 @@
         <activity
             android:name=".ui.workouts.EditWorkoutActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ui.workouts.AddWorkoutActivity"
             android:exported="false"
