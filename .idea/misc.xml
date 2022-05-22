@@ -16,7 +16,7 @@
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/activity_create_workout.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/activity_edit_rep_exercise.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/activity_edit_workout.xml" value="0.259375" />
-        <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/activity_perform_workout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/car_perform_timed.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/card_perform_rep.xml" value="0.18385416666666668" />
@@ -33,6 +33,7 @@
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/rep_performance_view.xml" value="0.25" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/timed_history_item.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/layout/timed_performance_view.xml" value="0.25" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/cis2208WorkoutTracker/app/src/main/res/menu/top_app_bar.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
