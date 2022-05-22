@@ -33,7 +33,7 @@ public class EditRepExerciseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_rep_exercise);
-        getSupportActionBar().setTitle(R.string.add_exercise_title);
+        getSupportActionBar().setTitle(R.string.edit_exercise_heading);
         //Get the id from the incoming intent
         Intent intent = getIntent();
         exerciseId = intent.getLongExtra("exerciseId", -1);
