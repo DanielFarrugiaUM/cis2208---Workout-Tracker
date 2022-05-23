@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         //the changes are not implemented yet, but the
         //idea is to load the resources files, such as
         //strings.xml and themes.xml and edit their content
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
         String test = sharedPreferences.getString("weight_unit", "");
 
         topAppBar = (MaterialToolbar) findViewById(R.id.topAppBar);
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 

@@ -80,6 +80,7 @@ public class DbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
+    //Table creations-------------------------------------------------
     private String createWorkoutsTable(){
         return "CREATE TABLE " + _workoutsTableName + " ("
                 + WorkoutsContract.WorkoutEntry._ID + " INTEGER PRIMARY KEY, "
@@ -138,6 +139,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 + ");";
     }
 
+    //Table drops-------------------------------------------------
     private String dropRepHistTable(){
         return "DROP TABLE IF EXISTS "
                 + _rHistTableName + ";";

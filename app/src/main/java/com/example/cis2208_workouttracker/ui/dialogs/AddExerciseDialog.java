@@ -31,7 +31,7 @@ public class AddExerciseDialog extends DialogFragment {
     }
     //The following was needed to enable/disable confirm btn
     //From:
-    // https://stackoverflow.com/questions/15912124/android-disable-dialogfragment-ok-cancel-buttons
+    //https://stackoverflow.com/questions/15912124/android-disable-dialogfragment-ok-cancel-buttons
     public void onStart(){
         super.onStart();
         AlertDialog dialog = (AlertDialog) getDialog();
