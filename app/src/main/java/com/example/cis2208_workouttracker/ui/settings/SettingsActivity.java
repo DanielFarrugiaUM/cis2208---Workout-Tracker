@@ -9,7 +9,9 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.example.cis2208_workouttracker.R;
 
 public class SettingsActivity extends AppCompatActivity {
-
+    //The was an experiment of how preferences work, but no real changes are made to
+    //the app (They were not part of the proposal requirements but
+    // was curious on learning about them)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
