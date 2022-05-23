@@ -19,7 +19,8 @@ import com.example.cis2208_workouttracker.domainModels.TimedExercise;
 import java.util.List;
 
 public class PerformanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    //We need to keep track of checked exercises
+    //that are the ones to be written in history as performed
     private List<Exercise> exercises;
     private List<Exercise> selected;
 

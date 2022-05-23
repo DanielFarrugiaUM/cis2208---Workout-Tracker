@@ -16,7 +16,7 @@ import com.example.cis2208_workouttracker.domainModels.TimedExercise;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-
+//This class processes history items in DB
 public class HistoryUtility {
 
     private final SQLiteOpenHelper _dbHelper;

@@ -48,16 +48,17 @@ public class EditWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_workout);
         getSupportActionBar().setTitle(R.string.edit_workout_title);
 
+        //Get the exercises and relevant workout id
         exercisesViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
         exercisesView = this.findViewById(R.id.exercise_list);
         workoutNameView = findViewById(R.id.name_input);
-
+        //Get components from view
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(this::onClickAdd);
 
          updateNameBtn = findViewById(R.id.updateNameBtn);
          updateNameBtn.setOnClickListener(this::onClickUpdateName);
-
+        //This is not working, see documentation bug section
          if(savedInstanceState != null){
              workoutId = savedInstanceState.getLong("workoutId");
          }else{
@@ -73,6 +74,7 @@ public class EditWorkoutActivity extends AppCompatActivity {
         populateScreen();
         setWorkoutName();
     }
+    //-----------------------------------------------------------------
     //I tried to keep state alive so that i can use back button
     //but was unable to do so
     //The debugger is enter this function, but still getting a null
@@ -88,8 +90,10 @@ public class EditWorkoutActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         workoutId = savedInstanceState.getLong("workoutId");
     }
+    //-----------------------------------------------------------------
 
-
+    //Some functions to reduce the clutter in on create
+    //These are to populate the screen ans set up recycler views
     private void populateScreen() {
         //Get the id from previous activity
         exercisesViewModel.getExercises(this, workoutId).observe(

@@ -16,7 +16,7 @@ import com.example.cis2208_workouttracker.domainModels.Workout;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-
+//this class handles both Rep and Timed exercises in db
 public class ExerciseUtility {
 
     private final SQLiteOpenHelper _dbHelper;

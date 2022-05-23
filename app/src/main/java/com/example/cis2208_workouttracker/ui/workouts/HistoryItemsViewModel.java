@@ -23,22 +23,11 @@ public class HistoryItemsViewModel extends ViewModel {
     public HistoryItemsViewModel(){
         items = new MutableLiveData<>();
     }
-
+    //Get data from db to display in history fragment
     public MutableLiveData<List<HistoryItem>> getItems(Context context, long date){
         DbHelper dbHelper = new DbHelper(context);
         HistoryUtility histUtil = new HistoryUtility(dbHelper);
         ArrayList<HistoryItem> newItems = histUtil.getHistItemsByDate(date);
-
-        //Hard coded data, needs to come from DB
-        /*RepExercise ex1 = new RepExercise("Exercise1", 3,15, 12, 1);
-        RepExercise ex2 = new RepExercise("Exercise1", 5,12.5, 8, 1);
-        TimedExercise ex3 = new TimedExercise("timed", 4, 0, new Time(0,1,30), 1);
-        HistoryItem i1 = new HistoryItem(ex1);
-        HistoryItem i2 = new HistoryItem(ex2);
-        HistoryItem i3 = new HistoryItem(ex3);
-        newItems.add(i1);
-        newItems.add(i2);
-        newItems.add(i3);*/
         items.setValue(newItems);
         return items;
     }

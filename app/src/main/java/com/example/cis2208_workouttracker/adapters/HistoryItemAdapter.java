@@ -22,7 +22,7 @@ import java.util.List;
 public class HistoryItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<HistoryItem> items;
 
-
+    //In this case I am using two Views for rep and timed
     public HistoryItemAdapter(List<HistoryItem> items){
         this.items = items;
     }
@@ -43,6 +43,7 @@ public class HistoryItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         View itemsView;
         RecyclerView.ViewHolder viewHolder = null;
+        //Need to decide what view inflate depending on exercise type
         switch (viewType){
             case 0:
                 itemsView = inflater.inflate(

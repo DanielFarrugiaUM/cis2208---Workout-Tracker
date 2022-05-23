@@ -77,6 +77,7 @@ public class WorkoutsAdapter extends
             editBtn.setOnClickListener(view -> onEditClick(workoutsView));
         }
 
+        //This applies to every workout's start btn
         public void onStartClick(View workoutsView){
             int pos = getAdapterPosition();
             Workout workout = workouts.get(pos);
@@ -87,6 +88,7 @@ public class WorkoutsAdapter extends
             workoutsView.getContext().startActivity(intent);
 
         }
+        //This applies to every workout's delete btn
         public void onDeleteClick(View workoutsView){
             int pos = getAdapterPosition();
             Workout workout = workouts.get(pos);
@@ -96,7 +98,7 @@ public class WorkoutsAdapter extends
             workouts.remove(workout);
             notifyDataSetChanged();
         }
-
+        //This applies to every workout's edit btn
         public void onEditClick(View workoutsView){
             int pos = getAdapterPosition();
             Workout workout = workouts.get(pos);

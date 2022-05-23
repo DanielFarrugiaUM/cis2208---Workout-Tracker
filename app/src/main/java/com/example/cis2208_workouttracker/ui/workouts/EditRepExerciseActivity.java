@@ -103,13 +103,6 @@ public class EditRepExerciseActivity extends AppCompatActivity {
 
     }
 
-/*    @Override
-    public void finish(){
-        Intent intent = new Intent(this, EditWorkoutActivity.class);
-        intent.putExtra("workoutId", workoutId);
-        super.finish();
-    }*/
-
     private boolean verifyInput(String setsVal, String repsVal){
         //Get the values from strings.xml
         Resources res = getApplicationContext().getResources();
